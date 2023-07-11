@@ -1,0 +1,2 @@
+class StockPerLocation < ApplicationRecord
+end

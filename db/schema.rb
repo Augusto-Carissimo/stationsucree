@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_29_204739) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_11_201405) do
   create_table "ingredients", force: :cascade do |t|
     t.string "name_ingredient"
     t.string "attr_1"
@@ -28,6 +28,33 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_204739) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ingredient_id"], name: "index_inventories_on_ingredient_id"
+  end
+
+  create_table "locations", force: :cascade do |t|
+    t.string "name_location"
+    t.string "address"
+    t.integer "phone"
+    t.string "email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name_product"
+    t.integer "quantity"
+    t.string "recipe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "stock_per_locations", force: :cascade do |t|
+    t.integer "location_id", null: false
+    t.integer "product_id", null: false
+    t.integer "quantity_product"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["location_id"], name: "index_stock_per_locations_on_location_id"
+    t.index ["product_id"], name: "index_stock_per_locations_on_product_id"
   end
 
   create_table "supplier_ingredients", force: :cascade do |t|
@@ -49,6 +76,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_29_204739) do
   end
 
   add_foreign_key "inventories", "ingredients"
+  add_foreign_key "stock_per_locations", "locations"
+  add_foreign_key "stock_per_locations", "products"
   add_foreign_key "supplier_ingredients", "ingredients"
   add_foreign_key "supplier_ingredients", "suppliers"
 end
