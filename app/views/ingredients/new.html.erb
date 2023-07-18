@@ -1,0 +1,40 @@
+<h1 class="display-1"> Add new ingredient </h1>
+
+
+<%= form_with(model: @ingredient,  local:true) do |form| %>
+  <p>
+    <%= form.label :name_ingredient %><br/>
+    <%= form.text_field :name_ingredient %><br/>
+  </p>
+
+  <p>
+    <%= form.label :attr_1 %><br/>
+    <%= form.text_field :attr_1 %><br/>
+  </p>
+
+  <p>
+  <p>
+    <%= form.label :attr_2 %><br/>
+    <%= form.text_field :attr_2 %><br/>
+  </p>
+
+  <p>
+  <p>
+    <%= form.label :attr_3 %><br/>
+    <%= form.text_field :attr_3 %><br/>
+  </p>
+
+  <p>
+    <%= form.label :exparation_date %><br/>
+    <%= form.text_field :exparation_date %><br/>
+  </p>
+
+  <p>
+    <%= form.label :last_price %><br/>
+    <%= form.text_field :last_price %><br/>
+  </p>
+
+  <p>
+    <%= form.submit 'submit' %>
+  </p>
+<% end %>
