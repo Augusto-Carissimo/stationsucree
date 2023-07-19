@@ -1,5 +1,13 @@
-<h1 class="display-1"> Add new ingredient </h1>
+<h1>Add new ingredient</h1>
 
+<% if @ingredient.errors.any? %>
+  <h2> Errors occured</h2>
+  <ul>
+    <% @ingredient.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
 
 <%= form_with(model: @ingredient,  local:true) do |form| %>
   <p>
