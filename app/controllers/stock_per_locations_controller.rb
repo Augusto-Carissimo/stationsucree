@@ -1,14 +1,18 @@
 class StockPerLocationsController < ApplicationController
-  def index
-    @stocks = []
-    locations.each do |location|
-      @stocks << StockPerLocation.where(location_id: location)
-    end
+
+  def edit
+    @stock = StockPerLocation.find(params[:id])
   end
 
-  private
-
-  def locations
-    @locations ||= Location.all
+  def update
+    @stock = StockPerLocation.find(params[:id])
+    if @stock.update(quantity_product: @stock.quantity_product + params.require(:stock_per_location).permit(
+      :quantity_product)[:quantity_product].to_i)
+      flash[:notice] = 'Stock updated'
+      redirect_to locations_path
+    else
+      flash[:notice] = "There's been an error"
+      redirect_to locations_path
+    end
   end
 end

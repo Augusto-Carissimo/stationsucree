@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
+  get 'locations/index'
+  get 'locations/show'
   root "pages#home"
   resources :ingredients, only: [:show, :new, :create]
   resources :inventories, only: [:index, :edit, :update]
-  resources :stock_per_locations
+  resources :stock_per_locations, only: [:edit, :update]
+  resources :locations, only: [:show, :index]
 end

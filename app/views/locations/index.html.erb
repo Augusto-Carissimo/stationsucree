@@ -1,0 +1,31 @@
+<h1>Locations</h1>
+
+<% @locations.each do |location| %>
+  <table style="width:50%">
+  <h1>
+    <%= link_to location.name_location, location_path(location), class: "nav-link" %>
+  </h1>
+  <tr>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Update inventory</th>
+  </tr>
+  <% location.stock_per_locations.each do |stock_per_location| %>
+    <tr>
+      <td>
+        <%= stock_per_location.product.name_product %>
+      </td>
+      <td>
+        <%= stock_per_location.quantity_product %>
+      </td>
+      <td>
+        <%= form_with(model: stock_per_location,  local:true) do |form| %>
+          <p>
+            <%= form.number_field :quantity_product, :value => 0 %> <%= form.submit 'Update Stock'%>
+          </p>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
