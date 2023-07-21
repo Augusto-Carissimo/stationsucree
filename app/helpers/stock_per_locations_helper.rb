@@ -1,0 +1,2 @@
+module StockPerLocationsHelper
+end
