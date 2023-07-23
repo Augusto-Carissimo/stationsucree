@@ -11,7 +11,7 @@
 
 <%= form_with(model: @ingredient,  local:true) do |form| %>
   <p>
-    <%= form.label :name_ingredient %><br/>
+    <%= form.label 'Ingredient name' %><br/>
     <%= form.text_field :name_ingredient %><br/>
   </p>
 
@@ -43,6 +43,6 @@
   </p>
 
   <p>
-    <%= form.submit 'submit' %>
+    <%= form.submit 'Add new ingredient' %>
   </p>
 <% end %>
