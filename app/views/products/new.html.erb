@@ -1,0 +1,32 @@
+<h1>Add new product</h1>
+
+<% if @product.errors.any? %>
+  <h2> Errors occured</h2>
+  <ul>
+    <% @product.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: @product,  local:true) do |form| %>
+  <p>
+    <%= form.label 'Product name' %><br/>
+    <%= form.text_field :name_product %><br/>
+  </p>
+
+  <p>
+    <%= form.label :quantity %><br/>
+    <%= form.text_field :quantity %><br/>
+  </p>
+
+  <p>
+  <p>
+    <%= form.label :recipe %><br/>
+    <%= form.text_field :recipe %><br/>
+  </p>
+
+  <p>
+    <%= form.submit 'Add new product' %>
+  </p>
+<% end %>

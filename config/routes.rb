@@ -5,5 +5,5 @@ Rails.application.routes.draw do
   resources :inventories, only: [:index, :edit, :update]
   resources :stock_per_locations, only: [:edit, :update]
   resources :locations, only: [:show, :index]
-  resources :products, only: [:index, :show, :edit, :update]
+  resources :products, only: [:index, :show, :edit, :update, :new]
 end
