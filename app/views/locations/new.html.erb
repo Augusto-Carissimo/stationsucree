@@ -1,0 +1,32 @@
+<h1>Add new location</h1>
+
+<% if @location.errors.any? %>
+  <h2> Errors occured</h2>
+  <ul>
+    <% @location.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: @location,  local:true) do |form| %>
+  <p>
+    <%= form.label 'Location name' %><br/>
+    <%= form.text_field :name_location %><br/>
+  </p>
+
+  <p>
+    <%= form.label :address %><br/>
+    <%= form.text_field :address %><br/>
+  </p>
+
+  <p>
+  <p>
+    <%= form.label :phone %><br/>
+    <%= form.text_field :phone %><br/>
+  </p>
+
+  <p>
+    <%= form.submit 'Add new location' %>
+  </p>
+<% end %>
