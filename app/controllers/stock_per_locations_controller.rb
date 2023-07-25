@@ -6,8 +6,12 @@ class StockPerLocationsController < ApplicationController
 
   def update
     @stock = StockPerLocation.find(params[:id])
-    if @stock.update(quantity_product: @stock.quantity_product + params.require(:stock_per_location).permit(
-      :quantity_product)[:quantity_product].to_i)
+    integer_params = params.require(:stock_per_location).permit(:quantity_product)[:quantity_product].to_i
+    if @stock.update(quantity_product: @stock.quantity_product + integer_params)
+      if integer_params.positive?
+        product = Product.find(@stock.product_id)
+        product.update(quantity: product.quantity - integer_params)
+      end
       flash[:notice] = 'Stock updated'
       redirect_to locations_path
     else
