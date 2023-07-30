@@ -1,3 +1,4 @@
-example_id                              | status | run_time       |
---------------------------------------- | ------ | -------------- |
-./spec/models/ingredient_spec.rb[1:1:1] | passed | 0.0255 seconds |
+example_id                              | status | run_time        |
+--------------------------------------- | ------ | --------------- |
+./spec/models/ingredient_spec.rb[1:1:1] | passed | 0.00369 seconds |
+./spec/models/ingredient_spec.rb[1:2:1] | passed | 0.27606 seconds |
