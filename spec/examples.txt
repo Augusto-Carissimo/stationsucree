@@ -1,6 +1,8 @@
 example_id                              | status | run_time        |
 --------------------------------------- | ------ | --------------- |
-./spec/models/ingredient_spec.rb[1:1:1] | passed | 0.00083 seconds |
-./spec/models/ingredient_spec.rb[1:2:1] | passed | 0.0144 seconds  |
-./spec/models/inventory_spec.rb[1:1:1]  | passed | 0.00126 seconds |
-./spec/models/inventory_spec.rb[1:2:1]  | passed | 0.1624 seconds  |
+./spec/models/ingredient_spec.rb[1:1:1] | passed | 0.02163 seconds |
+./spec/models/ingredient_spec.rb[1:2:1] | passed | 0.13179 seconds |
+./spec/models/inventory_spec.rb[1:1:1]  | passed | 0.00113 seconds |
+./spec/models/inventory_spec.rb[1:2:1]  | passed | 0.00819 seconds |
+./spec/models/location_spec.rb[1:1:1]   | passed | 0.00786 seconds |
+./spec/models/location_spec.rb[1:2:1]   | passed | 0.00448 seconds |
