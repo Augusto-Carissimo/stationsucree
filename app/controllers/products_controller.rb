@@ -15,6 +15,9 @@ class ProductsController < ApplicationController
     @product = Product.create(params.require(:product).permit(
       :name_product, :quantity, :recipe))
     if @product.save
+      Location.all.each do |location|
+        StockPerLocation.create!(product_id: @product.id, location_id: location.id)
+      end
       redirect_to product_path(@product)
     else
       flash[:notice] = "There's been an error."
@@ -35,5 +38,11 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find(params[:id])
+  end
+
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    redirect_to products_path
   end
 end

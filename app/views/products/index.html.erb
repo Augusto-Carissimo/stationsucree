@@ -4,7 +4,8 @@
   <tr>
     <th>Product</th>
     <th>Quantity</th>
-    <th>Update quantity</th>
+    <th>Production</th>
+    <th>Actions</th>
   </tr>
   <% @products.each do |product| %>
     <tr>
@@ -17,9 +18,12 @@
       <td>
         <%= form_with(model: product,  local:true) do |form| %>
           <p>
-            <%= form.number_field :quantity, :value => 0 %> <%= form.submit 'Update quantity'%>
+            <%= form.number_field :quantity, :value => 0 %> <%= form.submit 'Produce product'%>
           </p>
         <% end %>
+      </td>
+      <td><%= button_to 'Delete', product_path(product), method: :delete, form: {
+          data: { turbo_confirm: 'Are you sure?' } } %>
       </td>
     </tr>
   <% end %>
