@@ -12,13 +12,12 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.create(params.require(:product).permit(
-      :name_product, :quantity, :recipe))
+    @product = Product.new(params.require(:product).permit(:name_product, :quantity, :recipe))
     if @product.save
       Location.all.each do |location|
         StockPerLocation.create!(product_id: @product.id, location_id: location.id)
       end
-      redirect_to product_path(@product)
+      redirect_to products_path
     else
       flash[:notice] = "There's been an error."
       render 'new'

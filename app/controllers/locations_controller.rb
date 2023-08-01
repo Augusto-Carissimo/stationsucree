@@ -15,7 +15,10 @@ class LocationsController < ApplicationController
     @location = Location.create(params.require(:location).permit(
       :name_location, :address, :phone))
     if @location.save
-      redirect_to location_path(@location)
+      Product.all.each do |product|
+        StockPerLocation.create!(product_id: product.id, location_id: @location.id)
+      end
+      redirect_to locations_path
     else
       flash[:notice] = "There's been an error."
       render 'new'
