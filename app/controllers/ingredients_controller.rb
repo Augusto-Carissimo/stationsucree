@@ -8,11 +8,11 @@ class IngredientsController < ApplicationController
   end
 
   def create
-    @ingredient = Ingredient.create(params.require(:ingredient).permit(
+    @ingredient = Ingredient.new(params.require(:ingredient).permit(
       :name_ingredient, :attr_1, :attr_2, :attr_3,:exparation_date, :last_price))
     if @ingredient.save
-      Inventory.create!(ingredient_id: @ingredient.id, quantity: 1)
-      redirect_to ingredient_path(@ingredient)
+      Inventory.create!(ingredient_id: @ingredient.id, quantity_inventory: 1)
+      redirect_to inventories_path
     else
       flash[:notice] = "There's been an error."
       render 'new'

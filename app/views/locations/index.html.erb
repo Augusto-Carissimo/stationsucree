@@ -16,12 +16,12 @@
           <%= stock_per_location.product.name_product %>
         </td>
         <td>
-          <%= stock_per_location.quantity_product %>
+          <%= stock_per_location.quantity_stock %>
         </td>
         <td>
           <%= form_with(model: stock_per_location,  local:true) do |form| %>
             <p>
-              <%= form.number_field :quantity_product, :value => 0 %> <%= form.submit 'Transfer'%>
+              <%= form.number_field :quantity_stock, :value => 0 %> <%= form.submit 'Transfer'%>
             </p>
           <% end %>
         </td>

@@ -8,6 +8,6 @@ RSpec.describe Inventory do
   end
 
   describe 'validation' do
-    it { is_expected.to validate_numericality_of(:quantity).is_greater_than_or_equal_to(0) }
+    it { is_expected.to validate_numericality_of(:quantity_product).is_greater_than_or_equal_to(0) }
   end
 end

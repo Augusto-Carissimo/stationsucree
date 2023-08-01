@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(params.require(:product).permit(:name_product, :quantity, :recipe))
+    @product = Product.new(params.require(:product).permit(:name_product, :quantity_product, :recipe))
     if @product.save
       Location.all.each do |location|
         StockPerLocation.create!(product_id: @product.id, location_id: location.id)
@@ -26,7 +26,7 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    if @product.update(quantity: @product.quantity + params.require(:product).permit(:quantity)[:quantity].to_i)
+    if @product.update(quantity_product: @product.quantity_product + params.require(:product).permit(:quantity_product)[:quantity_product].to_i)
       flash[:notice] = 'Product updated'
       redirect_to products_path
     else

@@ -13,12 +13,12 @@
         <%= link_to product.name_product, product_path(product), class: "nav-link" %>
       </td>
       <td>
-        <%= product.quantity %>
+        <%= product.quantity_product %>
       </td>
       <td>
         <%= form_with(model: product,  local:true) do |form| %>
           <p>
-            <%= form.number_field :quantity, :value => 0 %> <%= form.submit 'Produce'%>
+            <%= form.number_field :quantity_product, :value => 0 %> <%= form.submit 'Produce'%>
           </p>
         <% end %>
       </td>

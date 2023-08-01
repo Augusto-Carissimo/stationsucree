@@ -9,7 +9,7 @@ class InventoriesController < ApplicationController
 
   def update
     @inventory = Inventory.find(params[:id])
-    if @inventory.update(quantity: @inventory.quantity + params.require(:inventory).permit(:quantity)[:quantity].to_i)
+    if @inventory.update(quantity_inventory: @inventory.quantity_inventory + params.require(:inventory).permit(:quantity_inventory)[:quantity_inventory].to_i)
       flash[:notice] = 'Inventory updated'
       redirect_to inventories_path
     else
