@@ -24,7 +24,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_201405) do
 
   create_table "inventories", force: :cascade do |t|
     t.integer "ingredient_id", null: false
-    t.integer "quantity_inventory"
+    t.integer "quantity_inventory", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["ingredient_id"], name: "index_inventories_on_ingredient_id"
@@ -50,7 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_11_201405) do
   create_table "stock_per_locations", force: :cascade do |t|
     t.integer "location_id", null: false
     t.integer "product_id", null: false
-    t.integer "quantity_stock"
+    t.integer "quantity_stock", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["location_id"], name: "index_stock_per_locations_on_location_id"
