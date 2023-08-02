@@ -9,6 +9,7 @@
       <th>Product</th>
       <th>Quantity</th>
       <th>Transfer from Lab</th>
+      <th>Sold products</th>
     </tr>
     <% location.stock_per_locations.each do |stock_per_location| %>
       <tr>
@@ -22,6 +23,13 @@
           <%= form_with(model: stock_per_location,  local:true) do |form| %>
             <p>
               <%= form.number_field :quantity_stock, :value => 0 %> <%= form.submit 'Transfer'%>
+            </p>
+          <% end %>
+        </td>
+        <td>
+          <%= form_with(model: stock_per_location,  local:true) do |form| %>
+            <p>
+              <%= form.number_field :quantity_stock, :value => 0 %> <%= form.submit 'Sold'%>
             </p>
           <% end %>
         </td>
