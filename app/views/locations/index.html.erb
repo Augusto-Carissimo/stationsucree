@@ -22,7 +22,7 @@
         <td>
           <%= form_with(model: stock_per_location,  local:true) do |form| %>
             <p>
-              <%= form.number_field :quantity_stock, :value => 0 %> <%= form.submit 'Transfer'%>
+              <%= form.number_field :quantity_stock, :value => Product.find(stock_per_location.product.id).quantity_product %> <%= form.submit 'Transfer'%>
             </p>
           <% end %>
         </td>
