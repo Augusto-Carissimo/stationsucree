@@ -1,12 +1,21 @@
-example_id                                      | status | run_time        |
------------------------------------------------ | ------ | --------------- |
-./spec/models/ingredient_spec.rb[1:1:1]         | passed | 0.00177 seconds |
-./spec/models/ingredient_spec.rb[1:2:1]         | passed | 0.16115 seconds |
-./spec/models/inventory_spec.rb[1:1:1]          | passed | 0.00156 seconds |
-./spec/models/inventory_spec.rb[1:2:1]          | passed | 0.0081 seconds  |
-./spec/models/location_spec.rb[1:1:1]           | passed | 0.00763 seconds |
-./spec/models/location_spec.rb[1:2:1]           | passed | 0.00636 seconds |
-./spec/models/product_spec.rb[1:1:1]            | passed | 0.00619 seconds |
-./spec/models/product_spec.rb[1:2:1]            | passed | 0.00549 seconds |
-./spec/models/stock_per_location_spec.rb[1:1:1] | passed | 0.00093 seconds |
-./spec/models/stock_per_location_spec.rb[1:1:2] | passed | 0.00532 seconds |
+example_id                                                   | status  | run_time        |
+------------------------------------------------------------ | ------- | --------------- |
+./spec/models/ingredient_spec.rb[1:1:1]                      | passed  | 0.00068 seconds |
+./spec/models/ingredient_spec.rb[1:2:1]                      | passed  | 0.01011 seconds |
+./spec/models/inventory_spec.rb[1:1:1]                       | passed  | 0.00144 seconds |
+./spec/models/inventory_spec.rb[1:2:1]                       | passed  | 0.14031 seconds |
+./spec/models/location_spec.rb[1:1:1]                        | passed  | 0.00527 seconds |
+./spec/models/location_spec.rb[1:2:1]                        | passed  | 0.00525 seconds |
+./spec/models/product_spec.rb[1:1:1]                         | passed  | 0.00089 seconds |
+./spec/models/product_spec.rb[1:2:1]                         | passed  | 0.00915 seconds |
+./spec/models/stock_per_location_spec.rb[1:1:1]              | passed  | 0.00106 seconds |
+./spec/models/stock_per_location_spec.rb[1:1:2]              | passed  | 0.0048 seconds  |
+./spec/views/inventories/index.html.erb_spec.rb[1:1]         | pending | 0 seconds       |
+./spec/views/inventories/update.html.erb_spec.rb[1:1]        | pending | 0.00001 seconds |
+./spec/views/locations/index.html.erb_spec.rb[1:1]           | pending | 0 seconds       |
+./spec/views/locations/show.html.erb_spec.rb[1:1]            | pending | 0 seconds       |
+./spec/views/products/edit.html.erb_spec.rb[1:1]             | pending | 0.00001 seconds |
+./spec/views/products/index.html.erb_spec.rb[1:1]            | pending | 0 seconds       |
+./spec/views/products/show.html.erb_spec.rb[1:1]             | pending | 0 seconds       |
+./spec/views/products/update.html.erb_spec.rb[1:1]           | pending | 0 seconds       |
+./spec/views/stock_per_locations/index.html.erb_spec.rb[1:1] | pending | 0.00001 seconds |
