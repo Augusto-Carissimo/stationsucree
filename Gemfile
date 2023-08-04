@@ -36,6 +36,7 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'rails-controller-testing'
 end
 
 group :development do
