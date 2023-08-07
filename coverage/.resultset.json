@@ -201,18 +201,6 @@
           null
         ]
       },
-      "/home/augusto/stationsucree/spec/factories/products_controller.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
-          null,
-          null
-        ]
-      },
       "/home/augusto/stationsucree/config/routes.rb": {
         "lines": [
           1,
@@ -270,45 +258,45 @@
           null,
           null,
           1,
-          0,
+          1,
           null,
           null,
           1,
-          0,
+          1,
           null,
           null,
           1,
-          0,
-          0,
-          0,
-          0,
-          null,
-          0,
-          null,
-          0,
-          0,
-          null,
-          null,
+          2,
+          2,
+          1,
+          1,
           null,
           1,
-          0,
-          0,
-          0,
-          0,
           null,
-          0,
-          0,
+          1,
+          1,
           null,
           null,
           null,
           1,
-          0,
+          2,
+          2,
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
           null,
           null,
           1,
-          0,
-          0,
-          0,
+          1,
+          1,
+          1,
           null,
           null
         ]
@@ -316,109 +304,6 @@
       "/home/augusto/stationsucree/app/controllers/application_controller.rb": {
         "lines": [
           1,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/spec/models/ingredient_spec.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          2,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/app/models/ingredient.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/spec/models/inventory_spec.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          2,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/app/models/inventory.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/spec/models/location_spec.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          2,
-          null,
-          null,
-          1,
-          2,
-          null,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/app/models/location.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          null,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/spec/models/product_spec.rb": {
-        "lines": [
-          null,
-          null,
-          1,
-          null,
-          1,
-          1,
-          2,
-          null,
-          null,
-          1,
-          2,
-          null,
           null
         ]
       },
@@ -433,17 +318,10 @@
           null
         ]
       },
-      "/home/augusto/stationsucree/spec/models/stock_per_location_spec.rb": {
+      "/home/augusto/stationsucree/app/models/application_record.rb": {
         "lines": [
-          null,
-          null,
-          1,
-          null,
           1,
           1,
-          2,
-          2,
-          null,
           null
         ]
       },
@@ -458,88 +336,17 @@
           null
         ]
       },
-      "/home/augusto/stationsucree/spec/views/inventories/index.html.erb_spec.rb": {
+      "/home/augusto/stationsucree/app/models/location.rb": {
         "lines": [
+          1,
           1,
           null,
           1,
-          1,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/spec/views/inventories/update.html.erb_spec.rb": {
-        "lines": [
-          1,
           null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/spec/views/locations/index.html.erb_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/spec/views/locations/show.html.erb_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/spec/views/products/edit.html.erb_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/spec/views/products/index.html.erb_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/spec/views/products/show.html.erb_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/spec/views/products/update.html.erb_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
-          null
-        ]
-      },
-      "/home/augusto/stationsucree/spec/views/stock_per_locations/index.html.erb_spec.rb": {
-        "lines": [
-          1,
-          null,
-          1,
-          1,
           null
         ]
       }
     },
-    "timestamp": 1691155877
+    "timestamp": 1691438098
   }
 }
