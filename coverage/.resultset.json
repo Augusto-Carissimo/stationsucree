@@ -250,7 +250,7 @@
           null
         ]
       },
-      "/home/augusto/stationsucree/app/controllers/products_controller.rb": {
+      "/home/augusto/stationsucree/app/controllers/locations_controller.rb": {
         "lines": [
           1,
           1,
@@ -267,6 +267,7 @@
           null,
           1,
           2,
+          null,
           2,
           1,
           1,
@@ -276,33 +277,29 @@
           1,
           1,
           null,
-          null,
-          null,
-          1,
-          2,
-          2,
-          1,
-          1,
-          null,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          1,
           null,
           null
         ]
       },
       "/home/augusto/stationsucree/app/controllers/application_controller.rb": {
         "lines": [
+          1,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/app/models/location.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/app/models/application_record.rb": {
+        "lines": [
+          1,
           1,
           null
         ]
@@ -318,13 +315,6 @@
           null
         ]
       },
-      "/home/augusto/stationsucree/app/models/application_record.rb": {
-        "lines": [
-          1,
-          1,
-          null
-        ]
-      },
       "/home/augusto/stationsucree/app/models/stock_per_location.rb": {
         "lines": [
           1,
@@ -335,18 +325,8 @@
           null,
           null
         ]
-      },
-      "/home/augusto/stationsucree/app/models/location.rb": {
-        "lines": [
-          1,
-          1,
-          null,
-          1,
-          null,
-          null
-        ]
       }
     },
-    "timestamp": 1691438098
+    "timestamp": 1691440179
   }
 }
