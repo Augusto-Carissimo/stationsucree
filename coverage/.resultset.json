@@ -201,6 +201,25 @@
           null
         ]
       },
+      "/home/augusto/stationsucree/spec/factories/ingredient_recipes.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/spec/factories/recipes.rb": {
+        "lines": [
+          1,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
       "/home/augusto/stationsucree/config/routes.rb": {
         "lines": [
           1,
@@ -250,14 +269,11 @@
           null
         ]
       },
-      "/home/augusto/stationsucree/app/models/stock_per_location.rb": {
+      "/home/augusto/stationsucree/app/models/ingredient_recipe.rb": {
         "lines": [
           1,
           1,
           1,
-          null,
-          1,
-          null,
           null
         ]
       },
@@ -268,13 +284,71 @@
           null
         ]
       },
-      "/home/augusto/stationsucree/app/models/product.rb": {
+      "/home/augusto/stationsucree/spec/models/ingredient_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/app/models/ingredient.rb": {
         "lines": [
           1,
           1,
           null,
           1,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/spec/models/inventory_spec.rb": {
+        "lines": [
+          null,
+          null,
           1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/app/models/inventory.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/spec/models/location_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
           null,
           null
         ]
@@ -289,57 +363,67 @@
           null
         ]
       },
-      "/home/augusto/stationsucree/app/controllers/stock_per_locations_controller.rb": {
+      "/home/augusto/stationsucree/spec/models/product_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/app/models/product.rb": {
         "lines": [
           1,
-          null,
-          1,
-          0,
-          null,
-          null,
-          1,
-          4,
-          4,
-          2,
-          null,
-          2,
-          null,
-          null,
-          null,
           1,
           null,
           1,
-          6,
+          1,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/spec/models/recipe_spec.rb": {
+        "lines": [
           null,
           null,
           1,
-          2,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          1,
-          2,
-          1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
           null,
           1,
           1,
-          1,
+          2,
           null,
           null,
           1,
           2,
           null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/app/models/recipe.rb": {
+        "lines": [
+          1,
+          1,
           null,
+          1,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/spec/models/stock_per_location_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
           1,
           2,
           2,
@@ -347,13 +431,18 @@
           null
         ]
       },
-      "/home/augusto/stationsucree/app/controllers/application_controller.rb": {
+      "/home/augusto/stationsucree/app/models/stock_per_location.rb": {
         "lines": [
           1,
+          1,
+          1,
+          null,
+          1,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1691510887
+    "timestamp": 1691512803
   }
 }
