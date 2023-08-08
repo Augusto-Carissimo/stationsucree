@@ -10,8 +10,9 @@ example_id                                                      | status  | run_
 ./spec/models/location_spec.rb[1:2:1]                           | passed  | 0.00623 seconds |
 ./spec/models/product_spec.rb[1:1:1]                            | passed  | 0.00093 seconds |
 ./spec/models/product_spec.rb[1:2:1]                            | passed  | 0.01164 seconds |
-./spec/models/recipe_spec.rb[1:1:1]                             | passed  | 0.0762 seconds  |
-./spec/models/recipe_spec.rb[1:2:1]                             | passed  | 0.15874 seconds |
+./spec/models/recipe_spec.rb[1:1:1]                             | passed  | 0.02744 seconds |
+./spec/models/recipe_spec.rb[1:2:1]                             | failed  | 0.23051 seconds |
+./spec/models/recipe_spec.rb[1:2:2]                             | failed  | 0.0011 seconds  |
 ./spec/models/stock_per_location_spec.rb[1:1:1]                 | passed  | 0.00966 seconds |
 ./spec/models/stock_per_location_spec.rb[1:1:2]                 | passed  | 0.00133 seconds |
 ./spec/requests/ingredients_controller_spec.rb[1:1:1:1]         | passed  | 0.00802 seconds |
