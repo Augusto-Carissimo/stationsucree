@@ -269,14 +269,13 @@
           null
         ]
       },
-      "/home/augusto/stationsucree/app/models/recipe.rb": {
+      "/home/augusto/stationsucree/app/models/ingredient_recipe.rb": {
         "lines": [
           1,
           1,
-          null,
-          1,
           1,
           null,
+          1,
           null
         ]
       },
@@ -287,15 +286,165 @@
           null
         ]
       },
-      "/home/augusto/stationsucree/app/models/ingredient_recipe.rb": {
+      "/home/augusto/stationsucree/spec/models/ingredient_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/app/models/ingredient.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/spec/models/inventory_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/app/models/inventory.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/spec/models/location_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/app/models/location.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/spec/models/product_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/app/models/product.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          1,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/spec/models/recipe_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          2,
+          null,
+          null,
+          1,
+          2,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/app/models/recipe.rb": {
+        "lines": [
+          1,
+          1,
+          null,
+          1,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/spec/models/stock_per_location_spec.rb": {
+        "lines": [
+          null,
+          null,
+          1,
+          null,
+          1,
+          1,
+          2,
+          2,
+          null,
+          null
+        ]
+      },
+      "/home/augusto/stationsucree/app/models/stock_per_location.rb": {
         "lines": [
           1,
           1,
           1,
+          null,
+          1,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1691512900
+    "timestamp": 1691513295
   }
 }
