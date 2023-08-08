@@ -1,20 +1,20 @@
 example_id                                                      | status  | run_time        |
 --------------------------------------------------------------- | ------- | --------------- |
-./spec/models/ingredient_recipe_spec.rb[1:1:1]                  | passed  | 0.00776 seconds |
-./spec/models/ingredient_recipe_spec.rb[1:1:2]                  | passed  | 0.00153 seconds |
-./spec/models/ingredient_recipe_spec.rb[1:1:3:1]                | passed  | 0.00394 seconds |
-./spec/models/ingredient_spec.rb[1:1:1]                         | passed  | 0.00806 seconds |
-./spec/models/ingredient_spec.rb[1:2:1]                         | passed  | 0.00749 seconds |
-./spec/models/inventory_spec.rb[1:1:1]                          | passed  | 0.00712 seconds |
-./spec/models/inventory_spec.rb[1:2:1]                          | passed  | 0.00307 seconds |
-./spec/models/location_spec.rb[1:1:1]                           | passed  | 0.07821 seconds |
-./spec/models/location_spec.rb[1:2:1]                           | passed  | 0.18148 seconds |
-./spec/models/product_spec.rb[1:1:1]                            | passed  | 0.00721 seconds |
-./spec/models/product_spec.rb[1:2:1]                            | passed  | 0.00628 seconds |
-./spec/models/recipe_spec.rb[1:1:1]                             | passed  | 0.0015 seconds  |
-./spec/models/recipe_spec.rb[1:2:1]                             | passed  | 0.0101 seconds  |
-./spec/models/stock_per_location_spec.rb[1:1:1]                 | passed  | 0.00968 seconds |
-./spec/models/stock_per_location_spec.rb[1:1:2]                 | passed  | 0.00135 seconds |
+./spec/models/ingredient_recipe_spec.rb[1:1:1]                  | passed  | 0.22323 seconds |
+./spec/models/ingredient_recipe_spec.rb[1:1:2]                  | passed  | 0.00156 seconds |
+./spec/models/ingredient_recipe_spec.rb[1:1:3:1]                | passed  | 0.00278 seconds |
+./spec/models/ingredient_spec.rb[1:1:1]                         | passed  | 0.00141 seconds |
+./spec/models/ingredient_spec.rb[1:2:1]                         | passed  | 0.01321 seconds |
+./spec/models/inventory_spec.rb[1:1:1]                          | passed  | 0.00703 seconds |
+./spec/models/inventory_spec.rb[1:2:1]                          | passed  | 0.00261 seconds |
+./spec/models/location_spec.rb[1:1:1]                           | passed  | 0.00684 seconds |
+./spec/models/location_spec.rb[1:2:1]                           | passed  | 0.00644 seconds |
+./spec/models/product_spec.rb[1:1:1]                            | passed  | 0.00674 seconds |
+./spec/models/product_spec.rb[1:2:1]                            | passed  | 0.0063 seconds  |
+./spec/models/recipe_spec.rb[1:1:1]                             | passed  | 0.0027 seconds  |
+./spec/models/recipe_spec.rb[1:1:2]                             | passed  | 0.00186 seconds |
+./spec/models/stock_per_location_spec.rb[1:1:1]                 | passed  | 0.00131 seconds |
+./spec/models/stock_per_location_spec.rb[1:1:2]                 | passed  | 0.0076 seconds  |
 ./spec/requests/ingredients_controller_spec.rb[1:1:1:1]         | passed  | 0.00802 seconds |
 ./spec/requests/ingredients_controller_spec.rb[1:1:2:1]         | passed  | 0.0082 seconds  |
 ./spec/requests/ingredients_controller_spec.rb[1:1:3:1]         | passed  | 0.00863 seconds |

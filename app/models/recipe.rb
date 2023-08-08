@@ -1,5 +1,4 @@
 class Recipe < ApplicationRecord
   has_one :ingredient_recipe, dependent: :destroy
-
-  validates :name_recipe, presence:, uniqueness: true
+  belongs_to :product
 end
