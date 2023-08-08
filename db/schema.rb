@@ -13,11 +13,11 @@
 ActiveRecord::Schema[7.0].define(version: 2023_08_08_164301) do
   create_table "ingredient_recipes", force: :cascade do |t|
     t.integer "recipe_id", null: false
-    t.integer "product_id", null: false
+    t.integer "ingredient_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "quantity_recipe", default: 0.0
-    t.index ["product_id"], name: "index_ingredient_recipes_on_product_id"
+    t.index ["ingredient_id"], name: "index_ingredient_recipes_on_ingredient_id"
     t.index ["recipe_id"], name: "index_ingredient_recipes_on_recipe_id"
   end
 
@@ -91,7 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_164301) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "ingredient_recipes", "products"
+  add_foreign_key "ingredient_recipes", "ingredients"
   add_foreign_key "ingredient_recipes", "recipes"
   add_foreign_key "inventories", "ingredients"
   add_foreign_key "stock_per_locations", "locations"
