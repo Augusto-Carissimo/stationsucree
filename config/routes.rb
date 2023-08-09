@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :stock_per_locations, only: [:edit, :update]
   resources :locations
   resources :products
+  resources :recipes
 end
