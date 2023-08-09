@@ -8,6 +8,7 @@ RSpec.describe ProductsController, type: :request do
     describe '#index' do
       it 'index' do
         get products_path
+        expect(assigns[:products]).to eq([product])
         expect(response).to render_template(:index)
         expect(response).to have_http_status(:ok)
       end
