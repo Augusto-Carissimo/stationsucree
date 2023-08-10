@@ -4,7 +4,9 @@ require 'rails_helper'
 
 RSpec.describe Recipe do
   describe 'associations' do
+    subject { FactoryBot.create(:recipe) }
     it { is_expected.to have_many(:ingredient_recipes) }
     it { is_expected.to belong_to(:product) }
+    it { should validate_uniqueness_of(:product_id) }
   end
 end
