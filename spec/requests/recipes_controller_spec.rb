@@ -34,41 +34,28 @@ RSpec.describe RecipesController, type: :request do
       end
     end
 
-    # describe '#create' do
-    #   # let!(:location) { Location.create(name_location: 'Alvear') }
-    #   it 'is created' do
-    #     expect {
-    #       post recipes_path, params: { product: { name_product: 'Pie' } }
-    #     }.to change{ Product.count }.by(1).and change{ StockPerLocation.all.count }.by(1)
-    #     expect(response).to have_http_status(:found)
-    #     expect(response).to redirect_to(products_path)
-    #   end
+    describe '#create' do
+      let(:product) { FactoryBot.create(:product) }
+      let!(:recipe_with_product) { FactoryBot.create(:recipe) }
+      let!(:ingredient) { FactoryBot.create(:ingredient) }
 
-    #   it 'fails' do
-    #     expect {
-    #       post products_path, params: { product: { name_product: '' } }
-    #     }.to change{ Product.count }.by(0)
-    #     expect(response).to have_http_status(:ok)
-    #     expect(response).to render_template(:new)
-    #     expect(response.body).to include("error")
-    #   end
-    # end
+      it 'is created' do
+        expect {
+          post recipes_path, params: { recipe: { product_id: product.id, ingredient.id.to_s => "1" } }
+        }.to change{ Recipe.count }.by(1).and change { IngredientRecipe.all.count }.by(Ingredient.all.count)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(recipes_path)
+      end
 
-    # describe '#update' do
-    #   it 'is updated' do
-    #     patch product_path(product.id), params: { product: { quantity_product: 10 } }
-    #     product.reload
-    #     expect(product.quantity_product).to be(10)
-    #     expect(response).to have_http_status(:found)
-    #     expect(response).to redirect_to(products_path)
-    #   end
-
-    #   it 'fails' do
-    #     patch product_path(product.id), params: { product: { quantity_product: -1 } }
-    #     expect(response).to have_http_status(:found)
-    #     expect(response).to redirect_to(products_path)
-    #   end
-    # end
+      it 'fails' do
+        expect {
+          post recipes_path, params: { recipe: { product_id: recipe_with_product.product.id } }
+        }.to change{ Recipe.count }.by(0)
+        expect(response).to have_http_status(:ok)
+        expect(response).to render_template(:new)
+        expect(response.body).to include("error")
+      end
+    end
 
     describe '#destroy' do
       it 'destroy' do

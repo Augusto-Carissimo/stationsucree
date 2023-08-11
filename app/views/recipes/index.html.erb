@@ -1,0 +1,7 @@
+<h1>Recipes</h1>
+<% @recipes.each do |recipe| %>
+  <h3>
+    <%= link_to recipe.product.name_product, recipe_path(recipe), class: "nav-link" %>
+  </h3>
+<% end %>
+
