@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_08_205402) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_12_151657) do
   create_table "ingredient_recipes", force: :cascade do |t|
     t.integer "recipe_id", null: false
     t.integer "ingredient_id", null: false
@@ -23,13 +23,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_205402) do
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name_ingredient"
-    t.string "attr_1"
-    t.string "attr_2"
-    t.string "attr_3"
-    t.datetime "exparation_date"
     t.integer "last_price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "size", default: 0.0
+    t.string "brand"
+    t.string "description"
   end
 
   create_table "inventories", force: :cascade do |t|
