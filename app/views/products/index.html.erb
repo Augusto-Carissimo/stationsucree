@@ -16,10 +16,14 @@
         <%= product.quantity_product %>
       </td>
       <td>
-        <%= form_with(model: product,  local:true) do |form| %>
-          <p>
-            <%= form.number_field :quantity_product, :value => 0 %> <%= form.submit 'Produce'%>
-          </p>
+        <% if product.recipe.nil? %>
+          <p> Add recipe to produce </p>
+        <% else %>
+          <%= form_with(model: product,  local:true) do |form| %>
+            <p>
+              <%= form.number_field :quantity_product, :value => 0 %> <%= form.submit 'Produce'%>
+            </p>
+          <% end %>
         <% end %>
       </td>
       <td><%= button_to 'Delete', product_path(product), method: :delete, form: {
