@@ -18,4 +18,10 @@ class IngredientsController < ApplicationController
       render 'new'
     end
   end
+
+  def destroy
+    @ingredient = Ingredient.find(params[:id])
+    @ingredient.destroy
+    redirect_to inventories_path
+  end
 end

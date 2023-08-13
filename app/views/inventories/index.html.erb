@@ -5,6 +5,7 @@
       <th>Ingredient</th>
       <th>Quantity</th>
       <th>Update inventory</th>
+      <th>Actions</th>
     </tr>
     <% @inventories.each do |inventory| %>
       <tr>
@@ -18,6 +19,9 @@
               <%= form.number_field :quantity_inventory, :value => 0 %> <%= form.submit%>
             </p>
           <% end %>
+        </td>
+        <td><%= button_to 'Delete', ingredient_path(inventory.ingredient), method: :delete, form: {
+          data: { turbo_confirm: 'Are you sure?' } } %>
         </td>
       </tr>
     <% end %>
