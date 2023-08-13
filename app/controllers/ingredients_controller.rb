@@ -19,6 +19,21 @@ class IngredientsController < ApplicationController
     end
   end
 
+  def edit
+    @ingredient = Ingredient.find(params[:id])
+  end
+
+  def update
+    @ingredient = Ingredient.find(params[:id])
+    if @ingredient.update(params.require(:ingredient).permit(:name_ingredient, :brand, :size, :description, :last_price))
+      flash[:notice] = 'Ingredient updated'
+      redirect_to inventories_path
+    else
+      flash[:notice] = "There's been an error."
+      redirect_to inventories_path
+    end
+  end
+
   def destroy
     @ingredient = Ingredient.find(params[:id])
     @ingredient.destroy
