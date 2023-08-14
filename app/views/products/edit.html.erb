@@ -1,0 +1,26 @@
+<h1>Edit <%= @product.name_product %> </h1>
+
+<% if @product.errors.any? %>
+  <h2> Errors occured</h2>
+  <ul>
+    <% @product.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with(model: @product,  local:true) do |form| %>
+  <p>
+    <%= form.label 'Product name' %><br/>
+    <%= form.text_field :name_product %><br/>
+  </p>
+
+  <p>
+    <%= form.label :recipe_text %><br/>
+    <%= form.text_field :recipe_text %><br/>
+  </p>
+
+  <p>
+    <%= form.submit 'Edit product' %>
+  </p>
+<% end %>

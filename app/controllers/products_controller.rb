@@ -26,12 +26,10 @@ class ProductsController < ApplicationController
 
   def update
     @product = Product.find(params[:id])
-    if @product.update(quantity_product: @product.quantity_product + params.require(:product).permit(:quantity_product)[:quantity_product].to_i)
-      flash[:notice] = 'Product updated'
-      redirect_to products_path
+    if params[:commit] == 'Edit product'
+      update_name_and_recipe
     else
-      flash[:notice] = "There's been an error."
-      redirect_to products_path
+      update_quantity
     end
   end
 
@@ -43,5 +41,28 @@ class ProductsController < ApplicationController
     @product = Product.find(params[:id])
     @product.destroy
     redirect_to products_path
+  end
+
+  private
+
+  def update_name_and_recipe
+    if @product.update(params.require(:product).permit(:name_product, :recipe_text))
+      p '-'*50
+      flash[:notice] = 'Product updated'
+      redirect_to products_path
+    else
+      flash[:notice] = "There's been an error."
+      redirect_to products_path
+    end
+  end
+
+  def update_quantity
+    if @product.update(quantity_product: @product.quantity_product + params.require(:product).permit(:quantity_product)[:quantity_product].to_i)
+      flash[:notice] = 'Product updated'
+      redirect_to products_path
+    else
+      flash[:notice] = "There's been an error."
+      redirect_to products_path
+    end
   end
 end
