@@ -6,3 +6,5 @@
   <li><%= @ingredient.description %></li>
   <li><%= @ingredient.last_price %></li>
 </ul>
+
+<%= button_to 'Edit', edit_ingredient_path(@ingredient), method: :get  %>
