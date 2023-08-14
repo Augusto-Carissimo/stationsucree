@@ -16,7 +16,7 @@
         <td>
           <%= form_with(model: inventory,  local:true) do |form| %>
             <p>
-              <%= form.number_field :quantity_inventory, :value => 0 %> <%= form.submit%>
+              <%= form.number_field :quantity_inventory, :step => "0.1", :value => 0 %> <%= form.submit%>
             </p>
           <% end %>
         </td>

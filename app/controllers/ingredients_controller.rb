@@ -11,7 +11,7 @@ class IngredientsController < ApplicationController
     @ingredient = Ingredient.new(params.require(:ingredient).permit(
       :name_ingredient, :attr_1, :attr_2, :attr_3,:exparation_date, :last_price))
     if @ingredient.save
-      Inventory.create!(ingredient_id: @ingredient.id, quantity_inventory: 1)
+      Inventory.create!(ingredient_id: @ingredient.id, quantity_inventory: 0)
       redirect_to inventories_path
     else
       flash[:notice] = "There's been an error."

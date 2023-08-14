@@ -47,7 +47,6 @@ class ProductsController < ApplicationController
 
   def update_name_and_recipe
     if @product.update(params.require(:product).permit(:name_product, :recipe_text))
-      p '-'*50
       flash[:notice] = 'Product updated'
       redirect_to products_path
     else
@@ -57,12 +56,24 @@ class ProductsController < ApplicationController
   end
 
   def update_quantity
-    if @product.update(quantity_product: @product.quantity_product + params.require(:product).permit(:quantity_product)[:quantity_product].to_i)
-      flash[:notice] = 'Product updated'
-      redirect_to products_path
-    else
-      flash[:notice] = "There's been an error."
-      redirect_to products_path
-    end
+    check_availability_ingredients
+    # if @product.update(quantity_product: @product.quantity_product + params.require(:product).permit(:quantity_product)[:quantity_product].to_f)
+    #   flash[:notice] = 'Product updated'
+    #   redirect_to products_path
+    # else
+    #   flash[:notice] = "There's been an error."
+    #   redirect_to products_path
+    # end
+  end
+
+  def check_availability_ingredients
+    p '-'*50
+    p @product.recipe
+    p '-'*50
+
+  end
+
+  def consume_ingredients
+
   end
 end
