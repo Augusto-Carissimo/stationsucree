@@ -6,7 +6,7 @@ RSpec.describe ProductsController, type: :request do
     let!(:product) { Product.create(name_product: 'Cake') }
 
     describe '#index' do
-      it 'index' do
+      it 'successful ' do
         get products_path
         expect(assigns[:products]).to eq([product])
         expect(response).to render_template(:index)
@@ -15,7 +15,7 @@ RSpec.describe ProductsController, type: :request do
     end
 
     describe '#show' do
-      it 'show' do
+      it 'successful ' do
         get product_path(product)
         expect(response).to render_template(:show)
         expect(response).to have_http_status(:ok)
@@ -24,7 +24,7 @@ RSpec.describe ProductsController, type: :request do
     end
 
     describe '#new' do
-      it 'new' do
+      it 'successful ' do
         get new_product_path
         expect(response).to render_template(:new)
         expect(response).to have_http_status(:ok)
@@ -34,7 +34,7 @@ RSpec.describe ProductsController, type: :request do
 
     describe '#create' do
       let!(:location) { Location.create(name_location: 'Alvear') }
-      it 'is created' do
+      it 'successful ' do
         expect {
           post products_path, params: { product: { name_product: 'Pie' } }
         }.to change{ Product.count }.by(1).and change{ StockPerLocation.all.count }.by(1)
@@ -53,7 +53,9 @@ RSpec.describe ProductsController, type: :request do
     end
 
     describe '#update' do
-      it 'is updated' do
+      let!(:product) { FactoryBot.create(:ingredient_recipe).recipe.product }
+      let!(:Inventory) { Inventory.create(ingredient: product.recipe.ingredient_recipes.first.ingredient) }
+      it 'successful ' do
         patch product_path(product.id), params: { product: { quantity_product: 10 } }
         product.reload
         expect(product.quantity_product).to be(10)
@@ -69,7 +71,7 @@ RSpec.describe ProductsController, type: :request do
     end
 
     describe '#destroy' do
-      it 'destroy' do
+      it 'successful ' do
         expect {
           delete product_path(product)
         }.to change { Product.count }.by(-1)
