@@ -76,7 +76,6 @@ class ProductsController < ApplicationController
 
   def check_availability_ingredients
     missing_ingredients = []
-    p product_with_recipe
     product_with_recipe.recipe.ingredient_recipes.each do |ingredient_recipe|
       necessary_amount = ingredient_recipe.quantity_recipe * quantity_params
       available_amount = ingredient_recipe.ingredient.inventory.quantity_inventory

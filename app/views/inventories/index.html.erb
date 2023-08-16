@@ -12,7 +12,7 @@
         <td>
           <%= link_to inventory.ingredient.name_ingredient, ingredient_path(inventory.ingredient), class: "nav-link" %>
         </td>
-        <td> <%= inventory.quantity_inventory %> </td>
+        <td> <%= inventory.quantity_inventory %> kg </td>
         <td>
           <%= form_with(model: inventory,  local:true) do |form| %>
             <p>
