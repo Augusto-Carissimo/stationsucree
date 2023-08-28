@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  before_action :require_user
 
   def index
     @recipes = Recipe.all

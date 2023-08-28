@@ -1,4 +1,6 @@
 class InventoriesController < ApplicationController
+  before_action :require_user
+
   def index
     @inventories = Inventory.all
   end

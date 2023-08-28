@@ -1,4 +1,6 @@
 class IngredientsController < ApplicationController
+  before_action :require_user
+
   def show
     @ingredient = Ingredient.find(params[:id])
   end

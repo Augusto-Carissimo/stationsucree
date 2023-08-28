@@ -1,4 +1,5 @@
 class StockPerLocationsController < ApplicationController
+  before_action :require_user
 
   def edit
     @stock = StockPerLocation.find(params[:id])

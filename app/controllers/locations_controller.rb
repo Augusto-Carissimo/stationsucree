@@ -1,4 +1,6 @@
 class LocationsController < ApplicationController
+  before_action :require_user
+
   def index
     @locations = Location.distinct(:id).joins(stock_per_locations: :product)
   end
