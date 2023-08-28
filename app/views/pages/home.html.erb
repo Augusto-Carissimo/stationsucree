@@ -1,20 +1,22 @@
-<div class="container">
-  <h1> Log in </h1>
+<% if !logged_in? %>
+  <div class="container">
+    <h1> Log in </h1>
 
-  <%= form_with(scope: :session, url: login_path) do |form| %>
+    <%= form_with(scope: :session, url: login_path) do |form| %>
 
-    <p>
-      <%= form.label :username %><br/>
-      <%= form.text_field :username %><br/>
-    </p>
+      <p>
+        <%= form.label :username %><br/>
+        <%= form.text_field :username %><br/>
+      </p>
 
-    <p>
-      <%= form.label :password %><br/>
-      <%= form.password_field :password %><br/>
-    </p>
+      <p>
+        <%= form.label :password %><br/>
+        <%= form.password_field :password %><br/>
+      </p>
 
-    <p>
-      <%= form.submit 'Log in' %>
-    </p>
-  <% end %>
-</div>
+      <p>
+        <%= form.submit 'Log in' %>
+      </p>
+    <% end %>
+  </div>
+<% end %>
