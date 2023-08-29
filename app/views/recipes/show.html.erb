@@ -1,16 +1,24 @@
 <h1> <%= @recipe.product.name_product %> </h1>
 
-<table style="width:50%">
+<table style="width:80%">
   <tr>
     <th>Ingredient</th>
     <th>Quantity</th>
     <th>Price</th>
   </tr>
   <% @recipe.ingredient_recipes.each do |ingredient| %>
-  <tr>
-    <th> <%= ingredient.ingredient.name_ingredient %> </th>
-    <th> <%= ingredient.quantity_recipe %> </th>
-    <th>  price </th>
-  </tr>
+    <tr>
+      <th> <%= ingredient.ingredient.name_ingredient %> </th>
+      <th> <%= ingredient.quantity_recipe %> </th>
+      <th> <%= (ingredient.ingredient.last_price * ingredient.quantity_recipe) %> </th>
+    </tr>
   <% end %>
+  <tr>
+
+  </tr>
+  <tr>
+    <th>Total price</th>
+    <th></th>
+    <th> <%= @total_price %> </th>
+  </tr>
 </table>

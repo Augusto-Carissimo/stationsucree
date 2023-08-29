@@ -7,6 +7,11 @@ class RecipesController < ApplicationController
 
   def show
     @recipe = Recipe.find(params[:id])
+    total_price = []
+    @recipe.ingredient_recipes.each do |ingredient|
+      total_price << (ingredient.ingredient.last_price * ingredient.quantity_recipe)
+    end
+    @total_price = total_price.sum
   end
 
   def new
