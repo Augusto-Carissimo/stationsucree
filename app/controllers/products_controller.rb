@@ -14,7 +14,11 @@ class ProductsController < ApplicationController
   end
 
   def create
-    @product = Product.new(params.require(:product).permit(:name_product, :quantity_product, :recipe_text))
+    p '-'*50
+    p params
+    p '-'*50
+
+    @product = Product.new(params.require(:product).permit(:name_product, :quantity_product, :recipe_text, :is_subproduct))
     if @product.save
       Location.all.each do |location|
         StockPerLocation.create!(product_id: @product.id, location_id: location.id)
