@@ -28,6 +28,17 @@
 
     <% end %>
 
+    <% unless @subproducts.nil? %>
+
+      <% @subproducts.each do |subproduct| %>
+        <tr>
+          <th> <%= subproduct.name_product %> </th>
+          <th> <%= form.number_field subproduct.name_product, :step => "0.1", :value => 0 %> </th>
+        </tr>
+      <% end %>
+
+    <% end %>
+
   </table>
   <p>
     <%= form.submit 'Add recipe' %>

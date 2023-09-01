@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_194902) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_30_202113) do
   create_table "ingredient_recipes", force: :cascade do |t|
     t.integer "recipe_id", null: false
     t.integer "ingredient_id", null: false
@@ -74,6 +74,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_194902) do
     t.index ["product_id"], name: "index_stock_per_locations_on_product_id"
   end
 
+  create_table "subproduct_recipes", force: :cascade do |t|
+    t.integer "recipe_id", null: false
+    t.integer "product_id", null: false
+    t.float "quantity_recipe", default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_subproduct_recipes_on_product_id"
+    t.index ["recipe_id"], name: "index_subproduct_recipes_on_recipe_id"
+  end
+
   create_table "supplier_ingredients", force: :cascade do |t|
     t.integer "ingredient_id", null: false
     t.integer "supplier_id", null: false
@@ -105,6 +115,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_194902) do
   add_foreign_key "recipes", "products"
   add_foreign_key "stock_per_locations", "locations"
   add_foreign_key "stock_per_locations", "products"
+  add_foreign_key "subproduct_recipes", "products"
+  add_foreign_key "subproduct_recipes", "recipes"
   add_foreign_key "supplier_ingredients", "ingredients"
   add_foreign_key "supplier_ingredients", "suppliers"
 end
