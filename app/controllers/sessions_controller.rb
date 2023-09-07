@@ -1,8 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :logged_in_redirect, only: [:new, :create]
-
-  def new
-  end
+  before_action :logged_in_redirect, only: [:create]
 
   def create
     user = User.find_by(username: params[:session][:username])
@@ -12,7 +9,7 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       flash.now[:error] = "There was something wrong with your login information"
-      render 'new'
+      redirect_to root_path
     end
   end
 
