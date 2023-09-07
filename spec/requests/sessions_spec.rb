@@ -1,4 +1,5 @@
 require 'rails_helper'
+require './spec/shared_contexts/logged_user.rb'
 
 RSpec.describe "Sessions", type: :request do
   describe "GET /index" do

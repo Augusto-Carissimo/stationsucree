@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 require 'rails_helper'
+require './spec/shared_contexts/logged_user.rb'
 
 RSpec.describe ProductsController, type: :request do
   context do
+
+    include_context 'logged user'
+
     let!(:product) { Product.create(name_product: 'Cake') }
 
     describe '#index' do

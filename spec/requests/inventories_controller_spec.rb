@@ -1,9 +1,12 @@
 # frozen_string_literal: true
 require 'rails_helper'
+require './spec/shared_contexts/logged_user.rb'
 
 RSpec.describe InventoriesController, type: :request do
   context do
     let!(:inventory) { Inventory.create!(ingredient_id: Ingredient.create(name_ingredient: 'Flour').id) }
+
+    include_context 'logged user'
 
     describe '#index' do
       it 'index' do

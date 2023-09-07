@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 require 'rails_helper'
+require './spec/shared_contexts/logged_user.rb'
 
 RSpec.describe LocationsController, type: :request do
   context do
+
+    include_context 'logged user'
+
     let(:location) { Location.create(name_location: 'Alvear') }
     let(:product) { Product.create(name_product: 'Cake') }
     let!(:stock) { StockPerLocation.create(location: location, product: product) }

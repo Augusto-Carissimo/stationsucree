@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 require 'rails_helper'
+require './spec/shared_contexts/logged_user.rb'
 
 RSpec.describe IngredientsController, type: :request do
   context do
+
+    include_context 'logged user'
+
     let!(:ingredient) { Ingredient.create(name_ingredient: 'Flour') }
 
     describe '#show' do
