@@ -39,13 +39,12 @@ RSpec.describe RecipesController, type: :request do
     end
 
     describe '#create' do
-      let(:product) { FactoryBot.create(:product) }
       let!(:recipe_with_product) { FactoryBot.create(:recipe) }
       let!(:ingredient) { FactoryBot.create(:ingredient) }
 
       it 'is created' do
         expect {
-          post recipes_path, params: { recipe: { product_id: product.id, ingredient.id.to_s => "1" } }
+          post recipes_path, params: { recipe: { product_id: product.id, ingredient.name_ingredient => "1" } }
         }.to change{ Recipe.count }.by(1).and change { IngredientRecipe.all.count }.by(Ingredient.all.count)
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(recipes_path)

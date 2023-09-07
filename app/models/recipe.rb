@@ -12,9 +12,6 @@ class Recipe < ApplicationRecord
   def price_ingredients
     total = 0
     ingredient_recipes.each do |ir|
-      p '-' *50
-      p ir.ingredient
-      p '-' *50
       total += ir.ingredient.last_price * ir.quantity_recipe
     end
     total
