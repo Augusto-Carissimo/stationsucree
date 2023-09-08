@@ -3,40 +3,43 @@ require 'rails_helper'
 require './spec/shared_contexts/logged_user.rb'
 
 RSpec.describe IngredientsController, type: :request do
-  context do
+  include_context 'logged user'
 
-    include_context 'logged user'
+  let!(:ingredient) { Ingredient.create(name_ingredient: 'Flour') }
 
-    let!(:ingredient) { Ingredient.create(name_ingredient: 'Flour') }
-
-    describe '#show' do
-      it 'show' do
-        get ingredient_path(ingredient)
-        expect(response).to render_template(:show)
-        expect(response).to have_http_status(:ok)
-        expect(response.body).to include(ingredient.name_ingredient)
-      end
+  describe 'Ingredient#show' do
+    it 'render Ingredient#show template successfully with Ingredient info' do
+      get ingredient_path(ingredient)
+      expect(response).to render_template(:show)
+      expect(response).to have_http_status(:ok)
+      expect(response.body).to include(ingredient.name_ingredient)
     end
+  end
 
-    describe '#new' do
-      it 'new' do
-        get new_ingredient_path
-        expect(response).to render_template(:new)
-        expect(response).to have_http_status(:ok)
-        expect(assigns[:ingredient]).to be_a(Ingredient)
-      end
+  describe 'Ingredient#new' do
+    it 'render Ingredient#new template successfully' do
+      get new_ingredient_path
+      expect(response).to render_template(:new)
+      expect(response).to have_http_status(:ok)
+      expect(assigns[:ingredient]).to be_a(Ingredient)
     end
+  end
 
-    describe '#create' do
-      it 'is created' do
+  describe 'Ingredient#create' do
+    context 'when Ingrendient params are valid' do
+      it 'create Ingredient successfully and redirect to Inventory#index page' do
         expect {
           post ingredients_path, params: { ingredient: { name_ingredient: 'Butter' } }
-        }.to change{ Ingredient.count }.by(1).and change{ Inventory.all.count }.by(1)
+        }.to change{ Ingredient.count }.by(1)
+        .and change{ Inventory.all.count }.by(1)
+
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(inventories_path)
       end
+    end
 
-      it 'fails' do
+    context 'when Ingrendient params are invalid' do
+      it 'display error message and redirect to Ingredients#new page' do
         expect {
           post ingredients_path, params: { ingredient: { name_ingredient: '' } }
         }.to change{ Ingredient.count }.by(0)
