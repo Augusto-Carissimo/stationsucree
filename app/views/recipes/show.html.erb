@@ -10,14 +10,18 @@
     <tr>
       <th> <%= ingredient.ingredient.name_ingredient %> </th>
       <th> <%= ingredient.quantity_recipe %> </th>
-      <th> <%= (ingredient.ingredient.last_price * ingredient.quantity_recipe) %> </th>
+      <th> <%= (ingredient.ingredient.last_price * ingredient.quantity_recipe).round(2) %> </th>
     </tr>
   <% end %>
   <% @recipe.subproduct_recipes.each do |subproduct| %>
   <tr>
     <th> <%= subproduct.product.name_product %> </th>
     <th> <%= subproduct.quantity_recipe %> </th>
-    <th> <%= subproduct.product.recipe.total_price %> </th>
+    <% if subproduct.product.recipe %>
+      <th> <%= subproduct.product.recipe.total_price %> </th>
+    <% else %>
+      <th> Add subproduct recipe for total price</th>
+    <% end %>
   </tr>
   <% end %>
   <tr>
