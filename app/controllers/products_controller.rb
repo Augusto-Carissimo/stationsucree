@@ -56,7 +56,7 @@ class ProductsController < ApplicationController
   end
 
   def update_name_and_recipe
-    if @product.update(params.require(:product).permit(:name_product, :recipe_text))
+    if @product.update(params.require(:product).permit(:name_product, :recipe_text, :is_subproduct))
       successful_message
     else
       error_message

@@ -21,6 +21,11 @@
   </p>
 
   <p>
+    <%= form.label 'Is a subproduct?' %><br/>
+    <%= form.check_box :is_subproduct %><br/>
+  </p>
+
+  <p>
     <%= form.submit 'Edit product' %>
   </p>
 <% end %>
