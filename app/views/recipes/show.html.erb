@@ -6,11 +6,11 @@
     <th>Quantity</th>
     <th>Price</th>
   </tr>
-  <% @recipe.ingredient_recipes.each do |ingredient| %>
+  <% @recipe.ingredient_recipes.each do |ir| %>
     <tr>
-      <th> <%= ingredient.ingredient.name_ingredient %> </th>
-      <th> <%= ingredient.quantity_recipe %> </th>
-      <th> <%= (ingredient.ingredient.last_price * ingredient.quantity_recipe).round(2) %> </th>
+      <th> <%= ir.ingredient.name_ingredient %> </th>
+      <th> <%= ir.quantity_recipe %> </th>
+      <th> <%= ir.price_ingredient %> </th>
     </tr>
   <% end %>
   <% @recipe.subproduct_recipes.each do |subproduct| %>
@@ -20,7 +20,7 @@
     <% if subproduct.product.recipe %>
       <th> <%= subproduct.product.recipe.total_price %> </th>
     <% else %>
-      <th> Add subproduct recipe for total price</th>
+      <th> Add Subproduct recipe</th>
     <% end %>
   </tr>
   <% end %>
