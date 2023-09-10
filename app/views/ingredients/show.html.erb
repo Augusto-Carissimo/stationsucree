@@ -1,10 +1,10 @@
 <h3 class="display-3"> <%= @ingredient.name_ingredient  %> </h3>
 
 <ul>
-  <li><%= @ingredient.brand %></li>
-  <li><%= @ingredient.size %></li>
-  <li><%= @ingredient.description %></li>
-  <li><%= @ingredient.last_price %></li>
+  <li>Brand: <%= @ingredient.brand %></li>
+  <li>Size: <%= @ingredient.size %></li>
+  <li>Description: <%= @ingredient.description %></li>
+  <li>Price: <%= @ingredient.last_price %></li>
 </ul>
 
 <%= button_to 'Edit', edit_ingredient_path(@ingredient), method: :get  %>
