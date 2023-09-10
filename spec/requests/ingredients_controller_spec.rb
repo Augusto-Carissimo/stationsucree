@@ -31,10 +31,9 @@ RSpec.describe IngredientsController, type: :request do
         expect {
           post ingredients_path, params: { ingredient: { name_ingredient: 'Butter' } }
         }.to change{ Ingredient.count }.by(1)
-        .and change{ Inventory.all.count }.by(1)
 
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(inventories_path)
+        expect(response).to redirect_to(ingredients_path)
       end
     end
 

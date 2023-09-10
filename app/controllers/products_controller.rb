@@ -77,7 +77,7 @@ class ProductsController < ApplicationController
     missing_ingredients = []
     @product.recipe.ingredient_recipes.each do |ingredient_recipe|
       necessary_amount = ingredient_recipe.quantity_recipe * quantity_params
-      available_amount = ingredient_recipe.ingredient.inventory.quantity_inventory
+      available_amount = ingredient_recipe.ingredient.quantity_ingredient
       if necessary_amount > available_amount
         missing_ingredients << ingredient_recipe.ingredient.name_ingredient
       end
@@ -94,10 +94,16 @@ class ProductsController < ApplicationController
 
   def consume_ingredients
     @product.recipe.ingredient_recipes.each do |ingredient_recipe|
-      Inventory.find(ingredient_recipe.ingredient.inventory.id).update(quantity_inventory: ingredient_recipe.ingredient.inventory.quantity_inventory - (ingredient_recipe.quantity_recipe * quantity_params))
+      current_quantity = ingredient_recipe.ingredient.quantity_ingredient
+      consume_quantity = (ingredient_recipe.quantity_recipe * quantity_params)
+      update_quantity = (current_quantity - consume_quantity).round(2)
+      Ingredient.find(ingredient_recipe.ingredient.id).update(quantity_ingredient: update_quantity)
     end
     @product.recipe.subproduct_recipes.each do |subproduct_recipe|
-      Product.find(subproduct_recipe.product.id).update(quantity_product: subproduct_recipe.product.quantity_product - (subproduct_recipe.quantity_recipe * quantity_params))
+      current_quantity = subproduct_recipe.product.quantity_product
+      consume_quantity = subproduct_recipe.quantity_recipe * quantity_params
+      update_quantity = (current_quantity - consume_quantity).round(2)
+      Product.find(subproduct_recipe.product.id).update(quantity_product: update_quantity)
     end
   end
 

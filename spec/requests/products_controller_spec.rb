@@ -64,7 +64,6 @@ RSpec.describe ProductsController, type: :request do
 
   describe 'Product#update' do
     let!(:product) { FactoryBot.create(:ingredient_recipe).recipe.product }
-    let!(:Inventory) { Inventory.create(ingredient: product.recipe.ingredient_recipes.first.ingredient) }
 
     context 'when Product params are valid' do
       it 'update Product successfully and redirect to Product#index page' do

@@ -1,0 +1,34 @@
+<h1>Ingredients</h1>
+
+  <table style="width:80%">
+    <tr>
+      <th>Ingredient</th>
+      <th>Quantity</th>
+      <th>Update quantity</th>
+      <th>Actions</th>
+    </tr>
+    <% @ingredients.each do |ingredient| %>
+      <tr>
+        <td>
+          <%= link_to ingredient.name_ingredient, ingredient_path(ingredient), class: "nav-link" %>
+        </td>
+        <td> <%= ingredient.quantity_ingredient %> kg </td>
+        <td>
+          <%= form_with(model: ingredient,  local:true) do |form| %>
+            <p>
+              <%= form.number_field :quantity_ingredient, :step => "0.1", :value => 0 %> <%= form.submit 'Add'%>
+            </p>
+          <% end %>
+        </td>
+        <td>
+          <%= button_to 'Delete', ingredient_path(ingredient), method: :delete, form: {
+            data: { turbo_confirm: 'Are you sure?' } } %>
+        </td>
+        <td>
+          <%= button_to 'Edit', edit_ingredient_path(ingredient), method: :get  %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<br>
+<button> <%= link_to "New ingredient", new_ingredient_path, class: "nav-link" %> </button>
