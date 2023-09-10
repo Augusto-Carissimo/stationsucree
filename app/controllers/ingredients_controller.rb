@@ -27,7 +27,7 @@ class IngredientsController < ApplicationController
 
   def update
     @ingredient = Ingredient.find(params[:id])
-    if @ingredient.update(params.require(:ingredient).permit(:name_ingredient, :brand, :size, :description, :last_price))
+    if @ingredient.update(params.require(:ingredient).permit(:name_ingredient, :last_price))
       flash[:notice] = 'Ingredient updated'
       redirect_to inventories_path
     else
