@@ -51,9 +51,6 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:quantity_product)[:quantity_product].to_f
   end
 
-  def product_with_recipe
-    @prod_join ||= Product.distinct(:id).where(id: @product.id).joins(recipe: :ingredient_recipes).first
-  end
 
   def edit_product
     if @product.update(params.require(:product).permit(:name_product, :recipe_text, :is_subproduct))
@@ -78,19 +75,29 @@ class ProductsController < ApplicationController
 
   def check_availability_ingredients
     missing_ingredients = []
-    product_with_recipe.recipe.ingredient_recipes.each do |ingredient_recipe|
+    @product.recipe.ingredient_recipes.each do |ingredient_recipe|
       necessary_amount = ingredient_recipe.quantity_recipe * quantity_params
       available_amount = ingredient_recipe.ingredient.inventory.quantity_inventory
       if necessary_amount > available_amount
         missing_ingredients << ingredient_recipe.ingredient.name_ingredient
       end
     end
+    @product.recipe.subproduct_recipes.each do |subproduct_recipe|
+      necessary_amount = subproduct_recipe.quantity_recipe * quantity_params
+      available_amount = subproduct_recipe.product.quantity_product
+      if necessary_amount > available_amount
+        missing_ingredients << subproduct_recipe.product.name_product
+      end
+    end
     missing_ingredients
   end
 
   def consume_ingredients
-    product_with_recipe.recipe.ingredient_recipes.each do |ingredient_recipe|
+    @product.recipe.ingredient_recipes.each do |ingredient_recipe|
       Inventory.find(ingredient_recipe.ingredient.inventory.id).update(quantity_inventory: ingredient_recipe.ingredient.inventory.quantity_inventory - (ingredient_recipe.quantity_recipe * quantity_params))
+    end
+    @product.recipe.subproduct_recipes.each do |subproduct_recipe|
+      Product.find(subproduct_recipe.product.id).update(quantity_product: subproduct_recipe.product.quantity_product - (subproduct_recipe.quantity_recipe * quantity_params))
     end
   end
 
