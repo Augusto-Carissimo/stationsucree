@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_202113) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_10_030043) do
   create_table "ingredient_recipes", force: :cascade do |t|
     t.integer "recipe_id", null: false
     t.integer "ingredient_id", null: false
@@ -26,9 +26,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_202113) do
     t.float "last_price", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "size", default: 0.0
-    t.string "brand"
-    t.string "description"
+    t.float "quantity_ingredient", default: 0.0
   end
 
   create_table "inventories", force: :cascade do |t|
