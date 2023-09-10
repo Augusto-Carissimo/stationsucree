@@ -29,9 +29,9 @@ class ProductsController < ApplicationController
   def update
     @product = Product.find(params[:id])
     if params[:commit] == 'Edit product'
-      update_name_and_recipe
+      edit_product
     else
-      update_quantity
+      produce_product
     end
   end
 
@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
     @prod_join ||= Product.distinct(:id).where(id: @product.id).joins(recipe: :ingredient_recipes).first
   end
 
-  def update_name_and_recipe
+  def edit_product
     if @product.update(params.require(:product).permit(:name_product, :recipe_text, :is_subproduct))
       successful_message
     else
@@ -63,7 +63,7 @@ class ProductsController < ApplicationController
     end
   end
 
-  def update_quantity
+  def produce_product
     if check_availability_ingredients.any?
       flash[:notice] = "There's not enough #{check_availability_ingredients.each { |ing| ing } } "
       redirect_to products_path
