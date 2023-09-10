@@ -17,7 +17,7 @@ class LocationsController < ApplicationController
     @location = Location.create(params.require(:location).permit(
       :name_location, :address, :phone))
     if @location.save
-      Product.all.each do |product|
+      Product.where(is_subproduct: false).each do |product|
         StockPerLocation.create!(product_id: product.id, location_id: @location.id)
       end
       redirect_to locations_path
