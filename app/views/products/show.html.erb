@@ -3,9 +3,15 @@
 <p> Quantity: <%= @product.quantity_product %> </p>
 <p> Recipe text: <%= @product.recipe_text %> </p>
 <table style=>
-  <td>
-    <%= button_to 'Recipe', recipe_path(@product.recipe), method: :get  %>
-  </td>
+  <% if @product.recipe %>
+    <td>
+      <%= button_to 'Recipe', recipe_path(@product.recipe), method: :get  %>
+    </td>
+  <% else %>
+    <td>
+      <%= button_to "Add #{@product.name_product} recipe", new_recipe_path, method: :get  %>
+    </td>
+  <% end %>
 
   <td>
     <%= button_to 'Edit product info', edit_product_path(@product), method: :get  %>

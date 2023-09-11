@@ -19,7 +19,8 @@ class ProductsController < ApplicationController
       Location.all.each do |location|
         StockPerLocation.create!(product_id: @product.id, location_id: location.id)
       end
-      redirect_to products_path
+      flash[:notice] = "Created #{@product.name_product} successfully, please add recipe."
+      redirect_to new_recipe_path
     else
       flash[:notice] = "There's been an error."
       render 'new'

@@ -16,7 +16,7 @@
       </td>
       <td>
         <% if product.recipe.nil? %>
-          <p> Add recipe to produce </p>
+          <%= button_to "Add #{product.name_product} recipe", new_recipe_path, method: :get  %>
         <% else %>
           <%= form_with(model: product,  local:true) do |form| %>
             <p>

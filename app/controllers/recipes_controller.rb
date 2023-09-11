@@ -32,8 +32,8 @@ class RecipesController < ApplicationController
       flash[:notice] = 'Recipe created'
       redirect_to recipes_path
     else
-      flash[:notice] = "There's been an error"
-      render 'new'
+      flash[:notice] = "Please select Product"
+      redirect_to new_recipe_path
     end
   end
 
