@@ -17,6 +17,7 @@ RSpec.describe ProductsController, type: :request do
   end
 
   describe 'Product#show' do
+    let!(:recipe) { Recipe.create(product: product) }
     it 'render Product#show template successfully with Product info' do
       get product_path(product)
       expect(response).to render_template(:show)
