@@ -37,6 +37,23 @@ class RecipesController < ApplicationController
     end
   end
 
+  def edit
+    @recipe = Recipe.find(params[:id])
+  end
+
+  def update
+    @recipe = Recipe.find(params[:id])
+    params[:recipe].each do |param|
+      if ingredient = Ingredient.find_by(name_ingredient: param[0])
+        @recipe.ingredient_recipes.find_by(ingredient: ingredient).update(quantity_recipe: param[1])
+      else
+        product = Product.find_by(name_product: param[0])
+        @recipe.subproduct_recipes.find_by(product: product).update(quantity_recipe: param[1])
+      end
+    end
+    redirect_to recipe_path(@recipe)
+  end
+
   def destroy
     @recipe = Recipe.find(params[:id])
     @recipe.destroy

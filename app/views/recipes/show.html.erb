@@ -9,16 +9,16 @@
   <% @recipe.ingredient_recipes.each do |ir| %>
     <tr>
       <th> <%= ir.ingredient.name_ingredient %> </th>
-      <th> <%= ir.quantity_recipe %> </th>
-      <th> <%= ir.price_ingredient %> </th>
+      <th> <%= ir.quantity_recipe %> kg </th>
+      <th> €<%= ir.price_ingredient %> </th>
     </tr>
   <% end %>
   <% @recipe.subproduct_recipes.each do |subproduct| %>
   <tr>
     <th> <%= subproduct.product.name_product %> </th>
-    <th> <%= subproduct.quantity_recipe %> </th>
+    <th> <%= subproduct.quantity_recipe %> kg </th>
     <% if subproduct.product.recipe %>
-      <th> <%= subproduct.product.recipe.total_price %> </th>
+      <th> €<%= subproduct.product.recipe.total_price %> </th>
     <% else %>
       <th> Add Subproduct recipe</th>
     <% end %>
@@ -27,6 +27,17 @@
   <tr>
     <th>Total price</th>
     <th></th>
-    <th> <%= @recipe.total_price %> </th>
+    <th> €<%= @recipe.total_price %> </th>
   </tr>
+</table>
+<br>
+<table>
+  <td>
+    <%= button_to 'Edit recipe', edit_recipe_path(@recipe), method: :get  %>
+  </td>
+
+  <td>
+    <%= button_to 'Delete recipe', recipe_path(@recipe), method: :delete, form: {
+                data: { turbo_confirm: 'Are you sure?' } } %>
+  </td>
 </table>

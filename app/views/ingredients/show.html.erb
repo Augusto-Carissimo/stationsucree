@@ -1,7 +1,14 @@
 <h3 class="display-3"> <%= @ingredient.name_ingredient  %> </h3>
 
-<ul>
-  <li>Price: <%= @ingredient.last_price %></li>
-</ul>
+<p> Price:  €<%= @ingredient.last_price %> per kg</li> </p>
+<br>
+<table>
+  <td>
+    <%= button_to 'Edit', edit_ingredient_path(@ingredient), method: :get  %>
+  </td>
 
-<%= button_to 'Edit', edit_ingredient_path(@ingredient), method: :get  %>
+  <td>
+    <%= button_to 'Delete', ingredient_path(@ingredient), method: :delete, form: {
+                data: { turbo_confirm: 'Are you sure?' } } %>
+  </td>
+</table>

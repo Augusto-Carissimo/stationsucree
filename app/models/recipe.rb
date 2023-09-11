@@ -6,7 +6,7 @@ class Recipe < ApplicationRecord
   validates_uniqueness_of :product_id
 
   def total_price
-    @total_price ||= price_ingredients + price_subproducts
+    @total_price ||= (price_ingredients + price_subproducts).round(2)
   end
 
   def price_ingredients
@@ -21,7 +21,7 @@ class Recipe < ApplicationRecord
     total = 0
     subproduct_recipes.each do |sr|
       if sr.product.recipe
-        total += sr.product.recipe.price_ingredients
+        total += (sr.product.recipe.price_ingredients * sr.quantity_recipe)
       end
     end
     @price_subproducts ||= total.round(2)

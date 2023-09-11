@@ -1,5 +1,16 @@
 <h1> <%= @location.name_location %> </h1>
 <br>
-<p> <%= @location.address %> </p>
-<p> <%= @location.email %> </p>
-<p> <%= @location.phone %> </p>
+<p> Address: <%= @location.address %> </p>
+<p> Email: <%= @location.email %> </p>
+<p> Phone: <%= @location.phone %> </p>
+<br>
+<table>
+  <td>
+    <%= button_to 'Edit location', edit_location_path(@location), method: :get  %>
+  </td>
+
+  <td>
+    <%= button_to 'Delete location', location_path(@location), method: :delete, form: {
+                data: { turbo_confirm: 'Are you sure?' } } %>
+  </td>
+</table>

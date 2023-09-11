@@ -26,4 +26,25 @@ class LocationsController < ApplicationController
       render 'new'
     end
   end
+
+  def edit
+    @location = Location.find(params[:id])
+  end
+
+  def update
+    @location = Location.find(params[:id])
+    if @location.update(params.require(:location).permit(:address, :email, :phone))
+      flash[:notice] = 'Location info updated'
+      redirect_to location_path
+    else
+      flash[:notice] = "There's been an error."
+      redirect_to location_path
+    end
+  end
+
+  def destroy
+    @location = Location.find(params[:id])
+    @location.destroy
+    redirect_to locations_path
+  end
 end
