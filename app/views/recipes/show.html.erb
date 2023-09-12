@@ -16,11 +16,11 @@
   <% @recipe.subproduct_recipes.each do |subproduct| %>
   <tr>
     <th> <%= subproduct.product.name_product %> </th>
-    <th> <%= subproduct.quantity_recipe %> kg </th>
+    <th> <%= subproduct.quantity_recipe %> units </th>
     <% if subproduct.product.recipe %>
       <th> €<%= subproduct.product.recipe.total_price %> </th>
     <% else %>
-      <th> Add Subproduct recipe</th>
+      <th> <%= button_to 'Add Subproduct recipe', new_recipes_path, method: :get  %>  </th>
     <% end %>
   </tr>
   <% end %>
