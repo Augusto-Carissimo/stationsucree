@@ -10,7 +10,7 @@
     <tr>
       <th> <%= ir.ingredient.name_ingredient %> </th>
       <th> <%= ir.quantity_recipe %> kg </th>
-      <th> €<%= ir.price_ingredient %> </th>
+      <th> <%= ir.price_ingredient %>€ </th>
     </tr>
   <% end %>
   <% @recipe.subproduct_recipes.each do |subproduct| %>
@@ -18,7 +18,7 @@
     <th> <%= subproduct.product.name_product %> </th>
     <th> <%= subproduct.quantity_recipe %> units </th>
     <% if subproduct.product.recipe %>
-      <th> €<%= subproduct.product.recipe.total_price %> </th>
+      <th> <%= subproduct.product.recipe.total_price %>€ </th>
     <% else %>
       <th> <%= button_to 'Add Subproduct recipe', new_recipes_path, method: :get  %>  </th>
     <% end %>
@@ -27,7 +27,7 @@
   <tr>
     <th>Total price</th>
     <th></th>
-    <th> €<%= @recipe.total_price %> </th>
+    <th> <%= @recipe.total_price %>€ </th>
   </tr>
 </table>
 <br>
