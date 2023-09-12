@@ -9,7 +9,7 @@
     <% @products.each do |product| %>
       <tr>
         <th> <%= product.name_product %> </th>
-        <th> <%= form.number_field product.id, :value => 0 %> </th>
+        <th> <%= form.number_field product.id, :value => 0, :min => 0 %> </th>
       </tr>
     <% end %>
   </table>
