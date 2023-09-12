@@ -7,7 +7,9 @@ Rails.application.routes.draw do
   resources :products
   resources :recipes
 
-
   post 'login', to: 'sessions#create'
   get 'logout', to: 'sessions#destroy'
+
+  get 'calculator', to: 'calculators#index'
+  post 'calculator', to: 'calculators#create'
 end

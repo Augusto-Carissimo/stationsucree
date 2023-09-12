@@ -1,0 +1,39 @@
+<h1> Production Calculator </h1>
+
+<%= form_with(scope: :calculator, url: calculator_path) do |form| %>
+  <table style="width:50%">
+    <tr>
+      <th>Ingredient</th>
+      <th>Quantity</th>
+    </tr>
+    <% @products.each do |product| %>
+      <tr>
+        <th> <%= product.name_product %> </th>
+        <th> <%= form.number_field product.id, :value => 0 %> </th>
+      </tr>
+    <% end %>
+  </table>
+  <p>
+    <%= form.submit 'Calculate' %>
+  </p>
+<% end %>
+
+<% if @production_cache %>
+      <h2> Order </h2><table style="width:50%">
+
+      <tr>
+        <th>Ingredient</th>
+        <th>Quantity</th>
+      </tr>
+
+      <% @production_cache.read('production').each do |ingredient| %>
+        <tr>
+          <th> <%= ingredient[0] %> </th>
+          <th> <%= ingredient[1] %>kg </th>
+        </tr>
+      <% end %>
+      <tr>
+        <th>Total price</th>
+        <th> <%= @production_cache.read('price') %>€ </th>
+      </tr>
+<% end %>
