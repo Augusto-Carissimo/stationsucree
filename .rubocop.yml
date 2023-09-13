@@ -1,0 +1,22 @@
+---
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-factory_bot
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  NewCops: enable
+
+Metrics/MethodLength:
+  CountAsOne: ['heredoc']
+
+Rails/NotNullColumn:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false
+
+Style/EmptyCaseCondition:
+  Enabled: true

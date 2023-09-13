@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LocationsController < ApplicationController
   before_action :require_user
 
@@ -13,33 +15,31 @@ class LocationsController < ApplicationController
     @location = Location.new
   end
 
+  def edit
+    @location = Location.find(params[:id])
+  end
+
   def create
-    @location = Location.create(params.require(:location).permit(
-      :name_location, :address, :phone))
+    @location = Location.create(params.require(:location).permit(:name_location, :address, :phone))
     if @location.save
       Product.where(is_subproduct: false).each do |product|
         StockPerLocation.create!(product_id: product.id, location_id: @location.id)
       end
       redirect_to locations_path
     else
-      flash[:notice] = "There's been an error."
+      flash[:notice] = I18n.t 'error'
       render 'new'
     end
   end
 
-  def edit
-    @location = Location.find(params[:id])
-  end
-
   def update
     @location = Location.find(params[:id])
-    if @location.update(params.require(:location).permit(:address, :email, :phone))
-      flash[:notice] = 'Location info updated'
-      redirect_to location_path
-    else
-      flash[:notice] = "There's been an error."
-      redirect_to location_path
-    end
+    flash[:notice] = if @location.update(params.require(:location).permit(:address, :email, :phone))
+                       I18n.t 'lu'
+                     else
+                       I18n.t 'error'
+                     end
+    redirect_to location_path
   end
 
   def destroy

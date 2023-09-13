@@ -31,3 +31,8 @@
 
 en:
   hello: "Hello world"
+  iu: "Ingredient updated."
+  error: "There's been an error."
+  ia: "Ingredient added."
+  lu: "Location info updated."
+  pu: 'Product updated'
