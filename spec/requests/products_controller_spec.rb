@@ -46,7 +46,7 @@ RSpec.describe ProductsController, type: :request do
         .and change{ StockPerLocation.all.count }.by(1)
 
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(products_path)
+        expect(response).to redirect_to(new_recipe_path)
       end
     end
 
@@ -56,8 +56,8 @@ RSpec.describe ProductsController, type: :request do
           post products_path, params: { product: { name_product: '' } }
         }.to change{ Product.count }.by(0)
 
-        expect(response).to have_http_status(:ok)
         expect(response).to render_template(:new)
+        expect(response).to have_http_status(:ok)
         expect(response.body).to include("error")
       end
     end
