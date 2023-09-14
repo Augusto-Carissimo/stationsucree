@@ -31,8 +31,15 @@
 
 en:
   hello: "Hello world"
-  iu: "Ingredient updated."
   error: "There's been an error."
+  iu: "Ingredient updated."
   ia: "Ingredient added."
   lu: "Location info updated."
-  pu: 'Product updated'
+  pu: 'Product updated.'
+  rc: 'Recipe created.'
+  psp: 'Please select Product.'
+  sli: 'You have successfully logged in'
+  wi: 'There was something wrong with your login information'
+  slo: 'You have successfully logged out'
+  ali: 'You are already logged in'
+  su: 'Stock updated'

@@ -58,9 +58,9 @@ RSpec.describe RecipesController, type: :request do
           post recipes_path, params: { recipe: { product_id: recipe_with_product.product.id } }
         }.to change{ Recipe.count }.by(0)
 
-        expect(response).to have_http_status(:ok)
-        expect(response).to render_template(:new)
-        expect(response.body).to include("error")
+        expect(response).to redirect_to(new_recipe_path)
+        expect(response).to have_http_status(:found)
+        expect(response.body).to include("Please select Product")
       end
     end
   end

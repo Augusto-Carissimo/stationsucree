@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class StockPerLocationsController < ApplicationController
   before_action :require_user
 
@@ -22,7 +24,7 @@ class StockPerLocationsController < ApplicationController
 
   def sold_product
     if @stock.update(quantity_stock: @stock.quantity_stock - stock_update_params)
-      flash[:notice] = 'Stock updated'
+      flash[:notice] = I18n.t 'su'
       redirect_to locations_path
     else
       error_messagge
@@ -30,8 +32,10 @@ class StockPerLocationsController < ApplicationController
   end
 
   def transfer_from_lab
-    if check_product_quantity >= stock_update_params && @stock.update(quantity_stock: @stock.quantity_stock + stock_update_params)
-      flash[:notice] = 'Stock updated'
+    if check_product_quantity >= stock_update_params && @stock.update(
+      quantity_stock: @stock.quantity_stock + stock_update_params
+    )
+      flash[:notice] = I18n.t 'su'
       subtract_from_lab
       redirect_to locations_path
     else
@@ -49,7 +53,7 @@ class StockPerLocationsController < ApplicationController
   end
 
   def error_messagge
-    flash[:notice] = "There's been an error"
+    flash[:notice] = I18n.t 'error'
     redirect_to locations_path
   end
 end
