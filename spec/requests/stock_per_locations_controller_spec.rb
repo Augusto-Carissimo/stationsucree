@@ -17,7 +17,7 @@ RSpec.describe StockPerLocation do
         expect(product.reload.quantity_product).to eq(0)
         expect(stock.reload.quantity_stock).to eq(20)
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(locations_path)
+        expect(response).to redirect_to(location_path(location))
       end
 
       it 'when want to transfer more Products that actually exists, redirect to Location#index' do
@@ -25,7 +25,7 @@ RSpec.describe StockPerLocation do
         expect(product.reload.quantity_product).to eq(10)
         expect(stock.reload.quantity_stock).to eq(10)
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(locations_path)
+        expect(response).to redirect_to(location_path(location))
       end
     end
 
@@ -35,13 +35,13 @@ RSpec.describe StockPerLocation do
         stock.reload
         expect(stock.quantity_stock).to eq(0)
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(locations_path)
+        expect(response).to redirect_to(location_path(location))
       end
 
       it 'when Location params are invalid fails sold' do
         patch stock_per_location_path(stock), params: { commit: 'Sold', stock_per_location: { quantity_stock: 20 } }
         expect(response).to have_http_status(:found)
-        expect(response).to redirect_to(locations_path)
+        expect(response).to redirect_to(location_path(location))
       end
     end
   end
