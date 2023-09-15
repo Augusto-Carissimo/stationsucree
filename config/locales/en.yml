@@ -42,4 +42,5 @@ en:
   wi: 'There was something wrong with your login information'
   slo: 'You have successfully logged out'
   ali: 'You are already logged in'
+  pli: 'Please log in'
   su: 'Stock updated'

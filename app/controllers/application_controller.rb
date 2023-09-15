@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   def require_user
     return if logged_in?
 
-    flash[:error] = 'Please log in'
+    flash[:error] = I18n.t 'pli'
     redirect_to root_path
   end
 end
