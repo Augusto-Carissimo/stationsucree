@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SubproductRecipe < ApplicationRecord
   belongs_to :recipe
   belongs_to :product

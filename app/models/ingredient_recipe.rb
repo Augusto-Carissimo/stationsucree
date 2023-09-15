@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class IngredientRecipe < ApplicationRecord
   belongs_to :recipe
   belongs_to :ingredient

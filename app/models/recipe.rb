@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 class Recipe < ApplicationRecord
   has_many :ingredient_recipes, dependent: :destroy
   has_many :subproduct_recipes, dependent: :destroy
   belongs_to :product
 
-  validates_uniqueness_of :product_id
+  validates :product_id, uniqueness: true
 
   def total_price
     @total_price ||= (price_ingredients + price_subproducts).round(2)
@@ -23,7 +25,7 @@ class Recipe < ApplicationRecord
   end
 
   def total_amount
-    @total_amount ||= amount_ingredient.merge(amount_subproduct) {|_, o, n| o + n}
+    @total_amount ||= amount_ingredient.merge(amount_subproduct) { |_, o, n| o + n }
   end
 
   def amount_ingredient
@@ -36,9 +38,9 @@ class Recipe < ApplicationRecord
 
   def amount_subproduct
     total = {}
-    subproduct_recipes.map {
-      |sr| total = total.merge(sr.product.recipe.amount_ingredient) {|_, o, n| o + n}
-    }
+    subproduct_recipes.map do |sr|
+      total = total.merge(sr.product.recipe.amount_ingredient) { |_, o, n| o + n }
+    end
     @amount_subproduct ||= total
   end
 end

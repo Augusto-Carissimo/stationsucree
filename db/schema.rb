@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_10_030043) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_15_020457) do
   create_table "ingredient_recipes", force: :cascade do |t|
     t.integer "recipe_id", null: false
     t.integer "ingredient_id", null: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_030043) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "quantity_ingredient", default: 0.0
+    t.index ["name_ingredient"], name: "index_ingredients_on_name_ingredient", unique: true
   end
 
   create_table "inventories", force: :cascade do |t|
@@ -44,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_030043) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name_location"], name: "index_locations_on_name_location", unique: true
   end
 
   create_table "products", force: :cascade do |t|
@@ -53,13 +55,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_030043) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "is_subproduct", default: false
+    t.index ["name_product"], name: "index_products_on_name_product", unique: true
   end
 
   create_table "recipes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "product_id", null: false
-    t.index ["product_id"], name: "index_recipes_on_product_id"
+    t.index ["product_id"], name: "index_recipes_on_product_id", unique: true
   end
 
   create_table "stock_per_locations", force: :cascade do |t|
@@ -105,6 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_10_030043) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "ingredient_recipes", "ingredients"
