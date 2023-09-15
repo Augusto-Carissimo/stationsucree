@@ -4,7 +4,7 @@ class LocationsController < ApplicationController
   before_action :require_user
 
   def index
-    @locations = Location.distinct(:id).joins(stock_per_locations: :product)
+    @locations = Location.distinct(:id).includes(stock_per_locations: :product)
   end
 
   def show
@@ -22,9 +22,8 @@ class LocationsController < ApplicationController
   def create
     @location = Location.create(params.require(:location).permit(:name_location, :address, :phone))
     if @location.save
-      Product.where(is_subproduct: false).each do |product|
-        StockPerLocation.create!(product_id: product.id, location_id: @location.id)
-      end
+      stocks = Product.where(is_subproduct: false).map { |prod| { product_id: prod.id, location_id: @location.id } }
+      StockPerLocation.insert_all(stocks) # rubocop:disable Rails::SkipsModelValidations
       redirect_to locations_path
     else
       flash[:notice] = I18n.t 'error'
