@@ -14,6 +14,7 @@ class StockPerLocationsController < ApplicationController
     else
       transfer_from_lab
     end
+    redirect_to location_path(@stock.location)
   end
 
   private
@@ -23,12 +24,11 @@ class StockPerLocationsController < ApplicationController
   end
 
   def sold_product
-    if @stock.update(quantity_stock: @stock.quantity_stock - stock_update_params)
-      flash[:notice] = I18n.t 'su'
-      redirect_to locations_path
-    else
-      error_messagge
-    end
+    flash.now[:notice] = if @stock.update(quantity_stock: @stock.quantity_stock - stock_update_params)
+                           I18n.t 'su'
+                         else
+                           I18n.t 'error'
+                         end
   end
 
   def transfer_from_lab
@@ -37,9 +37,8 @@ class StockPerLocationsController < ApplicationController
     )
       flash[:notice] = I18n.t 'su'
       subtract_from_lab
-      redirect_to locations_path
     else
-      error_messagge
+      flash[:notice] = I18n.t 'error'
     end
   end
 
@@ -50,10 +49,5 @@ class StockPerLocationsController < ApplicationController
 
   def check_product_quantity
     Product.find(@stock.product.id).quantity_product
-  end
-
-  def error_messagge
-    flash[:notice] = I18n.t 'error'
-    redirect_to locations_path
   end
 end

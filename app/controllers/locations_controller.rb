@@ -8,7 +8,7 @@ class LocationsController < ApplicationController
   end
 
   def show
-    @location = Location.find(params[:id])
+    @location = Location.includes(stock_per_locations: :product).find(params[:id])
   end
 
   def new

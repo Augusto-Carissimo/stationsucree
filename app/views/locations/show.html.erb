@@ -1,9 +1,43 @@
 <h1> <%= @location.name_location %> </h1>
+
+<table style="width:80%">
+  <tr>
+    <th>Product</th>
+    <th>Quantity</th>
+    <th>Transfer from Lab</th>
+    <th>Sold products</th>
+  </tr>
+  <% @location.stock_per_locations.each do |stock_per_location| %>
+    <tr>
+      <td>
+        <%= stock_per_location.product.name_product %>
+      </td>
+      <td>
+        <%= stock_per_location.quantity_stock %>
+      </td>
+      <td>
+        <%= form_with(model: stock_per_location,  local:true) do |form| %>
+          <p>
+            <%= form.number_field :quantity_stock, :value => stock_per_location.product.quantity_product %> <%= form.submit 'Transfer'%>
+          </p>
+        <% end %>
+      </td>
+      <td>
+        <%= form_with(model: stock_per_location,  local:true) do |form| %>
+          <p>
+            <%= form.number_field :quantity_stock, :value => 0 %> <%= form.submit 'Sold'%>
+          </p>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
 <br>
+<h3> <%= @location.name_location %> info </h3>
 <p> Address: <%= @location.address %> </p>
 <p> Email: <%= @location.email %> </p>
 <p> Phone: <%= @location.phone %> </p>
-<br>
+
 <table>
   <td>
     <%= button_to 'Edit location', edit_location_path(@location), method: :get  %>
