@@ -36,6 +36,7 @@ class IngredientsController < ApplicationController
     else
       edit_ingredient_info
     end
+    redirect_to ingredients_path
   end
 
   def destroy
@@ -46,27 +47,20 @@ class IngredientsController < ApplicationController
 
   private
 
-  def error_messagge
-    flash[:notice] = I18n.t 'error'
-    redirect_to ingredients_path
-  end
-
   def add_ingredient_quantity
     update_quantity = (@ingredient.quantity_ingredient + params[:ingredient][:quantity_ingredient].to_f).round(2)
-    if @ingredient.update(quantity_ingredient: update_quantity)
-      flash[:notice] = I18n.t 'ia'
-      redirect_to ingredients_path
-    else
-      error_messagge
-    end
+    flash.now[:notice] = if @ingredient.update(quantity_ingredient: update_quantity)
+                           I18n.t 'ia'
+                         else
+                           I18n.t 'error'
+                         end
   end
 
   def edit_ingredient_info
-    if @ingredient.update(params.require(:ingredient).permit(:name_ingredient, :last_price))
-      flash[:notice] = I18n.t 'iu'
-      redirect_to ingredients_path
-    else
-      error_messagge
-    end
+    flash.now[:notice] = if @ingredient.update(params.require(:ingredient).permit(:name_ingredient, :last_price))
+                           I18n.t 'iu'
+                         else
+                           I18n.t 'error'
+                         end
   end
 end

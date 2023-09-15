@@ -13,15 +13,17 @@ RSpec.describe StockPerLocation do
   describe 'StockPerLocation#update' do
     context 'when commit message from Location#index is Transfer' do
       it 'when Location params are valid subtract from Product.quantity_product and add to Stock.quantity_stock' do
-        patch stock_per_location_path(stock), params: { stock_per_location: { quantity_stock: 10 } }
+        patch stock_per_location_path(stock), params: { commit: 'Transfer', stock_per_location: { quantity_stock: 10 } }
         expect(product.reload.quantity_product).to eq(0)
         expect(stock.reload.quantity_stock).to eq(20)
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(locations_path)
       end
 
-      it 'when Location params are invalid redirect to Location#index' do
-        patch stock_per_location_path(stock), params: { stock_per_location: { quantity_stock: 20 } }
+      it 'when want to transfer more Products that actually exists, redirect to Location#index' do
+        patch stock_per_location_path(stock), params: { commit: 'Transfer', stock_per_location: { quantity_stock: 20 } }
+        expect(product.reload.quantity_product).to eq(10)
+        expect(stock.reload.quantity_stock).to eq(10)
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(locations_path)
       end

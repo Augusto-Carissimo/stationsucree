@@ -6,7 +6,17 @@ require './spec/shared_contexts/logged_user'
 RSpec.describe IngredientsController do
   include_context 'when user is logged'
 
-  let!(:ingredient) { Ingredient.create(name_ingredient: 'Flour') }
+  let!(:ingredient) { create(:ingredient) }
+
+  describe 'Ingredient#index' do
+    it 'render Ingredient#index template successfully' do
+      get ingredients_path
+      expect(assigns[:ingredients]).to eq([ingredient])
+      expect(response).to render_template(:index)
+      expect(response).to have_http_status(:ok)
+      expect(response).to be_successful
+    end
+  end
 
   describe 'Ingredient#show' do
     it 'render Ingredient#show template successfully with Ingredient info' do
@@ -23,6 +33,15 @@ RSpec.describe IngredientsController do
       expect(response).to render_template(:new)
       expect(response).to have_http_status(:ok)
       expect(assigns[:ingredient]).to be_a(Ingredient)
+    end
+  end
+
+  describe 'Ingredient#edit' do
+    it 'render Ingredient#edit template successfully' do
+      get edit_ingredient_path(ingredient)
+      expect(response).to render_template(:edit)
+      expect(response).to have_http_status(:ok)
+      expect(response).to be_successful
     end
   end
 
@@ -44,6 +63,45 @@ RSpec.describe IngredientsController do
         expect(response).to render_template(:new)
         expect(response.body).to include('error')
       end
+    end
+  end
+
+  describe 'Ingredient#update' do
+    context 'when commit message from Ingredient#update is Add' do
+      it 'when Ingredient params are valid: add to Ingredient.quantity_ingredient' do
+        patch ingredient_path(ingredient), params: { commit: 'Add', ingredient: { quantity_ingredient: 10 } }
+        expect(ingredient.reload.quantity_ingredient).to eq(10)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(ingredients_path)
+      end
+
+      it 'when try to add negative number: add to Ingredient.quantity_ingredient' do
+        patch ingredient_path(ingredient), params: { commit: 'Add', ingredient: { quantity_ingredient: -10 } }
+        expect(ingredient.reload.quantity_ingredient).to eq(0)
+        expect(response).to redirect_to(ingredients_path)
+      end
+    end
+
+    context 'when commit message from Ingredient#update is Edit' do
+      it 'when Ingredient params are valid: add to Ingredient.quantity_ingredient' do
+        patch ingredient_path(ingredient), params: { ingredient: { name_ingredient: 'Pies', last_price: 15 } }
+        expect(ingredient.reload.name_ingredient).to eq('Pies')
+        expect(ingredient.reload.last_price).to eq(15)
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(ingredients_path)
+      end
+
+      it 'when try to add negative number: add to Ingredient.quantity_ingredient' do
+        patch ingredient_path(ingredient), params: { commit: 'Edit', ingredient: { name_ingredient: '' } }
+        expect(ingredient.reload.name_ingredient).to eq(ingredient.name_ingredient)
+        expect(response).to redirect_to(ingredients_path)
+      end
+    end
+  end
+
+  describe 'Ingredient#destroy' do
+    it 'delete Ingredient' do
+      expect { delete ingredient_path(ingredient) }.to change(Ingredient, :count).by(-1)
     end
   end
 end
