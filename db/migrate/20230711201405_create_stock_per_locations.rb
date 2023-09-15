@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateStockPerLocations < ActiveRecord::Migration[7.0]
   def change
     create_table :stock_per_locations do |t|
