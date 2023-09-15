@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class ProductsController < ApplicationController
+class ProductsController < ApplicationController # rubocop:disable Metrics/ClassLength: Class has too many lines
   before_action :require_user
   before_action :set_product, only: %i[show edit update destroy]
 
@@ -68,7 +68,7 @@ class ProductsController < ApplicationController
                          end
   end
 
-  def produce_product
+  def produce_product # rubocop:disable Metrics/AbcSize: Assignment Branch Condition size for produce_product is too high
     if check_availability_ingredients.any?
       flash[:notice] = "There's not enough #{check_availability_ingredients.each { _ }}"
     elsif @product.update(quantity_product: @product.quantity_product + quantity_params) && consume_recipe_ingredients

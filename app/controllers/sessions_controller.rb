@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-  def create
+  def create # rubocop:disable Metrics/AbcSize
     user = User.find_by(username: params[:session][:username])
     if user&.authenticate(params[:session][:password])
       session[:user_id] = user.id

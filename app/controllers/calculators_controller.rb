@@ -5,7 +5,7 @@ class CalculatorsController < ApplicationController
 
   def index; end
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize: Assignment Branch Condition size for produce_product is too high
     production = {}
     price = 0.0
     params[:calculator].each do |param|

@@ -18,7 +18,7 @@ class RecipesController < ApplicationController
 
   def edit; end
 
-  def create
+  def create # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     @recipe = Recipe.new(params.require(:recipe).permit(:product_id))
     if @recipe.save
       params[:recipe].each do |param|
@@ -32,7 +32,7 @@ class RecipesController < ApplicationController
     end
   end
 
-  def update
+  def update # rubocop:disable Metrics/AbcSize: Assignment Branch Condition size for produce_product is too high
     params[:recipe].each do |param|
       if (ingredient = Ingredient.find_by(name_ingredient: param[0]))
         @recipe.ingredient_recipes.find_by(ingredient:).update(quantity_recipe: param[1])
