@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 RSpec.describe ApplicationController do
-
   describe 'require_user' do
     context 'when try to access without log in' do
       it 'redirect to root_path' do
