@@ -1,8 +1,9 @@
-Rails.application.routes.draw do
+# frozen_string_literal: true
 
-  root "pages#home"
+Rails.application.routes.draw do
+  root 'pages#home'
   resources :ingredients
-  resources :stock_per_locations, only: [:edit, :update]
+  resources :stock_per_locations, only: %i[edit update]
   resources :locations
   resources :products
   resources :recipes
