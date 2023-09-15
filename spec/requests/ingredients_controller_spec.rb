@@ -1,9 +1,10 @@
 # frozen_string_literal: true
-require 'rails_helper'
-require './spec/shared_contexts/logged_user.rb'
 
-RSpec.describe IngredientsController, type: :request do
-  include_context 'logged user'
+require 'rails_helper'
+require './spec/shared_contexts/logged_user'
+
+RSpec.describe IngredientsController do
+  include_context 'when user is logged'
 
   let!(:ingredient) { Ingredient.create(name_ingredient: 'Flour') }
 
@@ -28,10 +29,8 @@ RSpec.describe IngredientsController, type: :request do
   describe 'Ingredient#create' do
     context 'when Ingrendient params are valid' do
       it 'create Ingredient successfully and redirect to Inventory#index page' do
-        expect {
-          post ingredients_path, params: { ingredient: { name_ingredient: 'Butter' } }
-        }.to change{ Ingredient.count }.by(1)
-
+        expect { post ingredients_path, params: { ingredient: { name_ingredient: 'Butter' } } }
+          .to change(Ingredient, :count).by(1)
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(ingredients_path)
       end
@@ -39,12 +38,11 @@ RSpec.describe IngredientsController, type: :request do
 
     context 'when Ingrendient params are invalid' do
       it 'display error message and redirect to Ingredients#new page' do
-        expect {
-          post ingredients_path, params: { ingredient: { name_ingredient: '' } }
-        }.to change{ Ingredient.count }.by(0)
+        expect { post ingredients_path, params: { ingredient: { name_ingredient: '' } } }
+          .not_to change(Ingredient, :count)
         expect(response).to have_http_status(:ok)
         expect(response).to render_template(:new)
-        expect(response.body).to include("error")
+        expect(response.body).to include('error')
       end
     end
   end

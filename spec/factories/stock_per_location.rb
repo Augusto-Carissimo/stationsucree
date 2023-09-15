@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 FactoryBot.define do
-  factory :subproduct_recipe do
-    recipe
+  factory :stock_per_location do
     product
+    location
   end
 end

@@ -1,11 +1,12 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
-require './spec/shared_contexts/logged_user.rb'
+require './spec/shared_contexts/logged_user'
 
-RSpec.describe ProductsController, type: :request do
-  include_context 'logged user'
+RSpec.describe ProductsController do
+  include_context 'when user is logged'
 
-  let!(:product) { Product.create(name_product: 'Cake') }
+  let!(:product) { create(:product) }
 
   describe 'Product#index' do
     it 'render Product#index template successfully' do
@@ -17,7 +18,10 @@ RSpec.describe ProductsController, type: :request do
   end
 
   describe 'Product#show' do
-    let!(:recipe) { Recipe.create(product: product) }
+    before do
+      create(:recipe, product:)
+    end
+
     it 'render Product#show template successfully with Product info' do
       get product_path(product)
       expect(response).to render_template(:show)
@@ -36,14 +40,15 @@ RSpec.describe ProductsController, type: :request do
   end
 
   describe 'Product#create' do
-    let!(:location) { Location.create(name_location: 'Alvear') }
+    before do
+      create(:location)
+    end
 
     context 'when Product params are valid' do
       it 'create Product successfully and redirect to Product#index page' do
-        expect {
-          post products_path, params: { product: { name_product: 'Pie' } }
-        }.to change{ Product.count }.by(1)
-        .and change{ StockPerLocation.all.count }.by(1)
+        expect { post products_path, params: { product: { name_product: 'Pie' } } }
+          .to change(Product, :count).by(1)
+          .and change { StockPerLocation.all.count }.by(1)
 
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(new_recipe_path)
@@ -52,19 +57,18 @@ RSpec.describe ProductsController, type: :request do
 
     context 'when Product params are invalid' do
       it 'display error message and redirect to Product#new page' do
-        expect {
-          post products_path, params: { product: { name_product: '' } }
-        }.to change{ Product.count }.by(0)
+        expect { post products_path, params: { product: { name_product: product.name_product } } }
+          .not_to(change(Product, :count))
 
         expect(response).to render_template(:new)
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include("error")
+        expect(response.body).to include('error')
       end
     end
   end
 
   describe 'Product#update' do
-    let!(:product) { FactoryBot.create(:ingredient_recipe).recipe.product }
+    let!(:product) { create(:ingredient_recipe).recipe.product }
 
     context 'when Product params are valid' do
       it 'update Product successfully and redirect to Product#index page' do
@@ -87,10 +91,9 @@ RSpec.describe ProductsController, type: :request do
 
   describe 'Product#destroy' do
     it 'delete Product' do
-      expect {
+      expect do
         delete product_path(product)
-      }.to change { Product.count }.by(-1)
+      end.to change(Product, :count).by(-1)
     end
   end
-
 end

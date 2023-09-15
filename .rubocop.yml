@@ -20,3 +20,6 @@ Style/Documentation:
 
 Style/EmptyCaseCondition:
   Enabled: true
+
+RSpec/MultipleExpectations:
+  Enabled: false

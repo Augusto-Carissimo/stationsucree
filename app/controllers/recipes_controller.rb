@@ -56,13 +56,13 @@ class RecipesController < ApplicationController
   end
 
   def create_recipe_structure(param)
-    return unless param[0] != 'product_id' && param[1].to_f.positive?
-
-    if (ingredient = Ingredient.find_by(name_ingredient: param[0]))
-      IngredientRecipe.create!(recipe: @recipe, ingredient:, quantity_recipe: param[1])
-    else
-      product = Product.find_by(name_product: param[0])
-      SubproductRecipe.create!(recipe: @recipe, product:, quantity_recipe: param[1])
+    if param[0] != 'product_id' && param[1].to_f.positive?
+      if (ingredient = Ingredient.find_by(name_ingredient: param[0]))
+        IngredientRecipe.create!(recipe: @recipe, ingredient:, quantity_recipe: param[1])
+      else
+        product = Product.find_by(name_product: param[0])
+        SubproductRecipe.create!(recipe: @recipe, product:, quantity_recipe: param[1])
+      end
     end
   end
 end

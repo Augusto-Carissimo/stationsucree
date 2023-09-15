@@ -1,13 +1,17 @@
 # frozen_string_literal: true
+
 require 'rails_helper'
-require './spec/shared_contexts/logged_user.rb'
+require './spec/shared_contexts/logged_user'
 
-RSpec.describe LocationsController, type: :request do
-  include_context 'logged user'
+RSpec.describe LocationsController do
+  include_context 'when user is logged'
 
-  let(:location) { Location.create(name_location: 'Alvear') }
-  let(:product) { Product.create(name_product: 'Cake') }
-  let!(:stock) { StockPerLocation.create(location: location, product: product) }
+  let(:location) { create(:location) }
+  let(:product) { create(:product) }
+
+  before do
+    create(:stock_per_location, product:, location:)
+  end
 
   describe 'Location#index' do
     it 'render Location#index template successfully' do
@@ -40,24 +44,23 @@ RSpec.describe LocationsController, type: :request do
   describe 'Location#create' do
     context 'when Location params are valid' do
       it 'create Location successfully and redirect to Location#index page' do
-        expect {
-          post locations_path, params: { location: { name_location: 'Guido' } }
-        }.to change{ Location.count }.by(1)
-        .and change{ StockPerLocation.all.count }.by(1)
+        expect { post locations_path, params: { location: { name_location: 'Guido' } } }
+          .to change(Location, :count).by(1)
+          .and change { StockPerLocation.all.count }.by(1)
 
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(locations_path)
       end
     end
+
     context 'when Location params are invalid' do
       it 'display error message and redirect to Location#new page' do
-        expect {
-          post locations_path, params: { location: { name_location: '' } }
-        }.to change{ Location.count }.by(0)
+        expect { post locations_path, params: { location: { name_location: '' } } }
+          .not_to(change(Location, :count))
 
         expect(response).to have_http_status(:ok)
         expect(response).to render_template(:new)
-        expect(response.body).to include("error")
+        expect(response.body).to include('error')
       end
     end
   end
