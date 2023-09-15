@@ -70,7 +70,7 @@ class ProductsController < ApplicationController # rubocop:disable Metrics/Class
 
   def produce_product # rubocop:disable Metrics/AbcSize: Assignment Branch Condition size for produce_product is too high
     if check_availability_ingredients.any?
-      flash[:notice] = "There's not enough #{check_availability_ingredients.each { _ }}"
+      flash[:notice] = "There's not enough #{check_availability_ingredients.each {}}" # empty block
     elsif @product.update(quantity_product: @product.quantity_product + quantity_params) && consume_recipe_ingredients
       flash[:notice] = I18n.t 'pu'
     else
@@ -80,12 +80,12 @@ class ProductsController < ApplicationController # rubocop:disable Metrics/Class
 
   def check_availability_ingredients
     missing_ingredients = []
-    check_ingredients
-    check_subproducts
+    check_ingredients(missing_ingredients)
+    check_subproducts(missing_ingredients)
     missing_ingredients
   end
 
-  def check_ingredients
+  def check_ingredients(missing_ingredients)
     @product.recipe.ingredient_recipes.each do |ingredient_recipe|
       necessary_amount = ingredient_recipe.quantity_recipe * quantity_params
       available_amount = ingredient_recipe.ingredient.quantity_ingredient
@@ -93,7 +93,7 @@ class ProductsController < ApplicationController # rubocop:disable Metrics/Class
     end
   end
 
-  def check_subproducts
+  def check_subproducts(missing_ingredients)
     @product.recipe.subproduct_recipes.each do |subproduct_recipe|
       necessary_amount = subproduct_recipe.quantity_recipe * quantity_params
       available_amount = subproduct_recipe.product.quantity_product
