@@ -7,7 +7,6 @@ RSpec.describe RecipesController do
   include_context 'when user is logged'
 
   let!(:recipe) { create(:recipe) }
-  let(:product) { create(:product) }
 
   describe 'Recipe#index' do
     it 'render Recipe#index template successfully' do
@@ -39,12 +38,19 @@ RSpec.describe RecipesController do
   describe 'Recipe#create' do
     let!(:recipe_with_product) { create(:recipe) }
     let!(:ingredient) { create(:ingredient) }
+    let(:product) { create(:product) }
+    let(:subproduct) { create(:product, name_product: 'Tapas') }
 
     context 'when Recipe params are valid' do
-      it 'create Recipe successfully and redirect to Recipe#index page' do
-        expect { post recipes_path, params: { recipe: { product_id: product.id, ingredient.name_ingredient => '1' } } }
+      it 'create Recipe successfully and redirect to Recipe#index page' do # rubocop:disable RSpec/ExampleLength
+        expect do
+          post recipes_path,
+               params: { recipe: { product_id: product.id, ingredient.name_ingredient => '1',
+                                   subproduct.name_product => '1' } }
+        end
           .to change(Recipe, :count).by(1)
-          .and change { IngredientRecipe.all.count }.by(Ingredient.all.count)
+          .and change { IngredientRecipe.all.count }.by(1)
+          .and change { SubproductRecipe.all.count }.by(1)
 
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(recipes_path)
@@ -59,6 +65,35 @@ RSpec.describe RecipesController do
         expect(response).to redirect_to(new_recipe_path)
         expect(response).to have_http_status(:found)
       end
+    end
+  end
+
+  describe 'Recipe#update' do
+    before do
+      create(:ingredient_recipe, recipe:, quantity_recipe: 1)
+      create(:subproduct_recipe, recipe:, quantity_recipe: 1)
+    end
+
+    it 'when params are valid update Recipe ingredient_recipe successfully and redirect to Recipe#show page' do
+      patch recipe_path(recipe), params: { recipe: { recipe.ingredient_recipes.first.ingredient.name_ingredient => 2 } }
+      expect(recipe.ingredient_recipes.first.quantity_recipe).to eq(2)
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(recipe_path(recipe))
+    end
+
+    it 'when params are valid update Recipe subproduct_recipe successfully and redirect to Recipe#show page' do
+      patch recipe_path(recipe), params: { recipe: { recipe.subproduct_recipes.first.product.name_product => 2 } }
+      expect(recipe.subproduct_recipes.first.quantity_recipe).to eq(2)
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(recipe_path(recipe))
+    end
+
+    it 'when params are invalid update Recipe ingredient_recipe successfully and redirect to Recipe#show page' do
+      patch recipe_path(recipe),
+            params: { recipe: { recipe.ingredient_recipes.first.ingredient.name_ingredient => -1 } }
+      expect(recipe.ingredient_recipes.first.quantity_recipe).to eq(1)
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(recipe_path(recipe))
     end
   end
 

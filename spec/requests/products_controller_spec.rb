@@ -71,29 +71,40 @@ RSpec.describe ProductsController do
 
         expect(response).to render_template(:new)
         expect(response).to have_http_status(:ok)
-        expect(response.body).to include('error')
+        expect(response.request.flash[:notice]).to include('error')
       end
     end
   end
 
   describe 'Product#update' do
-    before { create(:subproduct_recipe, recipe: product.recipe) }
+    before do
+      create(:subproduct_recipe, recipe: product.recipe)
+      create(:ingredient_recipe, recipe: product.recipe, ingredient: sugar, quantity_recipe: 2)
+    end
 
-    let!(:product) { create(:ingredient_recipe).recipe.product }
+    let(:sugar) { create(:ingredient, name_ingredient: 'Sugar', quantity_ingredient: 20) }
+    let!(:product) { create(:recipe).product }
 
     context 'when update commit message is Produce' do
       it 'when params are valid update Product.quantity_product successfully and redirect to Product#index page' do
         patch product_path(product.id), params: { product: { quantity_product: 10 } }
-        product.reload
-        expect(product.quantity_product).to be(10)
+        expect(product.reload.quantity_product).to be(10)
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(products_path)
+        expect(response.request.flash[:notice]).to include('updated')
       end
 
       it 'when params are invalid display error message and redirect to Product#index page' do
         patch product_path(product.id), params: { product: { quantity_product: -1 } }
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(products_path)
+      end
+
+      it 'when there are not enough ingredients display error message and redirect to Product#index page' do
+        patch product_path(product.id), params: { product: { quantity_product: 15 } }
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(products_path)
+        expect(response.request.flash[:notice]).to include('not enough')
       end
     end
 
@@ -103,6 +114,7 @@ RSpec.describe ProductsController do
         expect(product.reload.name_product).to eq('Alfajor')
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(products_path)
+        expect(response.request.flash[:notice]).to include('updated')
       end
 
       it 'when params are invalid display error message and redirect to Product#index page' do
@@ -110,6 +122,7 @@ RSpec.describe ProductsController do
         expect { product.reload }.not_to change(product, :name_product)
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(products_path)
+        expect(response.request.flash[:notice]).to include('error')
       end
     end
   end
