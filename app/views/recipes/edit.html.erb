@@ -20,7 +20,7 @@
       <% @recipe.ingredient_recipes.each do |ingredient_recipe| %>
         <tr>
           <th> <%= ingredient_recipe.ingredient.name_ingredient %> </th>
-          <th> <%= form.number_field ingredient_recipe.ingredient.name_ingredient, :step => "0.1", :value => ingredient_recipe.quantity_recipe %> </th>
+          <th> <%= form.number_field ingredient_recipe.ingredient.name_ingredient, :step => "0.1", :min => 0, :value => ingredient_recipe.quantity_recipe %> </th>
         </tr>
       <% end %>
 

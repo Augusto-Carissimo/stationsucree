@@ -44,3 +44,4 @@ en:
   ali: 'You are already logged in'
   pli: 'Please log in'
   su: 'Stock updated'
+  rcnm: "Recipes can't have negative quantities."

@@ -38,7 +38,7 @@ RSpec.describe RecipesController do
   describe 'Recipe#create' do
     let!(:recipe_with_product) { create(:recipe) }
     let!(:ingredient) { create(:ingredient) }
-    let(:product) { create(:product) }
+    let(:product) { create(:product, name_product: 'Alfajor') }
     let(:subproduct) { create(:product, name_product: 'Tapas') }
 
     context 'when Recipe params are valid' do
@@ -94,6 +94,7 @@ RSpec.describe RecipesController do
       expect(recipe.ingredient_recipes.first.quantity_recipe).to eq(1)
       expect(response).to have_http_status(:found)
       expect(response).to redirect_to(recipe_path(recipe))
+      expect(response.request.flash[:notice]).to include('negative')
     end
   end
 

@@ -34,7 +34,9 @@ class RecipesController < ApplicationController
 
   def update # rubocop:disable Metrics/AbcSize: Assignment Branch Condition size for produce_product is too high
     params[:recipe].each do |param|
-      if (ingredient = Ingredient.find_by(name_ingredient: param[0]))
+      if param[1].to_f.negative?
+        flash[:notice] = I18n.t 'rcnm'
+      elsif (ingredient = Ingredient.find_by(name_ingredient: param[0]))
         @recipe.ingredient_recipes.find_by(ingredient:).update(quantity_recipe: param[1])
       else
         product = Product.find_by(name_product: param[0])
