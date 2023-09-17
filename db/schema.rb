@@ -11,9 +11,12 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.0].define(version: 2023_09_15_020457) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "ingredient_recipes", force: :cascade do |t|
-    t.integer "recipe_id", null: false
-    t.integer "ingredient_id", null: false
+    t.bigint "recipe_id", null: false
+    t.bigint "ingredient_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.float "quantity_recipe", default: 0.0
@@ -28,14 +31,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_020457) do
     t.datetime "updated_at", null: false
     t.float "quantity_ingredient", default: 0.0
     t.index ["name_ingredient"], name: "index_ingredients_on_name_ingredient", unique: true
-  end
-
-  create_table "inventories", force: :cascade do |t|
-    t.integer "ingredient_id", null: false
-    t.float "quantity_inventory", default: 0.0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ingredient_id"], name: "index_inventories_on_ingredient_id"
   end
 
   create_table "locations", force: :cascade do |t|
@@ -61,13 +56,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_020457) do
   create_table "recipes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "product_id", null: false
+    t.bigint "product_id", null: false
     t.index ["product_id"], name: "index_recipes_on_product_id", unique: true
   end
 
   create_table "stock_per_locations", force: :cascade do |t|
-    t.integer "location_id", null: false
-    t.integer "product_id", null: false
+    t.bigint "location_id", null: false
+    t.bigint "product_id", null: false
     t.integer "quantity_stock", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -76,8 +71,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_020457) do
   end
 
   create_table "subproduct_recipes", force: :cascade do |t|
-    t.integer "recipe_id", null: false
-    t.integer "product_id", null: false
+    t.bigint "recipe_id", null: false
+    t.bigint "product_id", null: false
     t.float "quantity_recipe", default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -86,8 +81,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_020457) do
   end
 
   create_table "supplier_ingredients", force: :cascade do |t|
-    t.integer "ingredient_id", null: false
-    t.integer "supplier_id", null: false
+    t.bigint "ingredient_id", null: false
+    t.bigint "supplier_id", null: false
     t.integer "price"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -113,7 +108,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_15_020457) do
 
   add_foreign_key "ingredient_recipes", "ingredients"
   add_foreign_key "ingredient_recipes", "recipes"
-  add_foreign_key "inventories", "ingredients"
   add_foreign_key "recipes", "products"
   add_foreign_key "stock_per_locations", "locations"
   add_foreign_key "stock_per_locations", "products"

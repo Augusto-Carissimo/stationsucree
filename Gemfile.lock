@@ -135,6 +135,7 @@ GEM
     parser (3.2.2.3)
       ast (~> 2.4.1)
       racc
+    pg (1.5.4)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -257,7 +258,6 @@ GEM
       actionpack (>= 5.2)
       activesupport (>= 5.2)
       sprockets (>= 3.0.0)
-    sqlite3 (1.6.4-x86_64-linux)
     stimulus-rails (1.2.2)
       railties (>= 6.0.0)
     thor (1.2.2)
@@ -291,6 +291,7 @@ DEPENDENCIES
   faker
   jbuilder
   jsbundling-rails
+  pg
   pry
   puma (~> 5.0)
   rails (~> 7.0.6)
@@ -307,7 +308,6 @@ DEPENDENCIES
   shoulda-matchers
   simplecov
   sprockets-rails
-  sqlite3 (~> 1.4)
   stimulus-rails
   turbo-rails
   tzinfo-data
