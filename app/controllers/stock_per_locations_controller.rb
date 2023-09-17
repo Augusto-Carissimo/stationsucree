@@ -3,10 +3,6 @@
 class StockPerLocationsController < ApplicationController
   before_action :require_user
 
-  def edit
-    @stock = StockPerLocation.find(params[:id])
-  end
-
   def update
     @stock = StockPerLocation.find(params[:id])
     if params[:commit] == 'Sold'

@@ -13,7 +13,7 @@ class Recipe < ApplicationRecord
 
   def price_ingredients
     total = 0
-    ingredient_recipes.map { |ir| total += (ir.ingredient.last_price * ir.quantity_recipe) }
+    ingredient_recipes.map { |ir| total += ir.price_ingredient }
     @price_ingredients ||= total.round(2)
   end
 

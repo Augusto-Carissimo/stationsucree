@@ -33,12 +33,12 @@ class LocationsController < ApplicationController
 
   def update
     @location = Location.find(params[:id])
-    flash[:notice] = if @location.update(params.require(:location).permit(:address, :email, :phone))
+    flash[:notice] = if @location.update(params.require(:location).permit(:name_location, :address, :email, :phone))
                        I18n.t 'lu'
                      else
                        I18n.t 'error'
                      end
-    redirect_to location_path
+    redirect_to location_path(@location)
   end
 
   def destroy

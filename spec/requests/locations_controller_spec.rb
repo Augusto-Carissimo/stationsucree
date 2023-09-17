@@ -41,6 +41,15 @@ RSpec.describe LocationsController do
     end
   end
 
+  describe 'Location#edit' do
+    it 'render Location#edit template successfully' do
+      get edit_location_path(location)
+      expect(response).to render_template(:edit)
+      expect(response).to have_http_status(:ok)
+      expect(response).to be_successful
+    end
+  end
+
   describe 'Location#create' do
     context 'when Location params are valid' do
       it 'create Location successfully and redirect to Location#index page' do
@@ -62,6 +71,30 @@ RSpec.describe LocationsController do
         expect(response).to render_template(:new)
         expect(response.body).to include('error')
       end
+    end
+  end
+
+  describe 'Location#update' do
+    it 'when params are valid update Location info successfully and redirect to Location#show page' do
+      patch location_path(location), params: { location: { name_location: 'Location' } }
+      expect(location.reload.name_location).to eq('Location')
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(location_path(location))
+    end
+
+    it 'when params are invalid display error message and redirect to Location#show page' do
+      patch location_path(location), params: { location: { name_location: '' } }
+      expect { location.reload }.not_to change(location, :name_location)
+      expect(response).to have_http_status(:found)
+      expect(response).to redirect_to(location_path(location))
+    end
+  end
+
+  describe 'Location#destroy' do
+    it 'delete Location' do
+      expect do
+        delete location_path(location)
+      end.to change(Location, :count).by(-1)
     end
   end
 end

@@ -39,6 +39,15 @@ RSpec.describe ProductsController do
     end
   end
 
+  describe 'Product#edit' do
+    it 'render Product#edit template successfully' do
+      get edit_product_path(product)
+      expect(response).to render_template(:edit)
+      expect(response).to have_http_status(:ok)
+      expect(response).to be_successful
+    end
+  end
+
   describe 'Product#create' do
     before do
       create(:location)
@@ -68,21 +77,37 @@ RSpec.describe ProductsController do
   end
 
   describe 'Product#update' do
+    before { create(:subproduct_recipe, recipe: product.recipe) }
+
     let!(:product) { create(:ingredient_recipe).recipe.product }
 
-    context 'when Product params are valid' do
-      it 'update Product successfully and redirect to Product#index page' do
+    context 'when update commit message is Produce' do
+      it 'when params are valid update Product.quantity_product successfully and redirect to Product#index page' do
         patch product_path(product.id), params: { product: { quantity_product: 10 } }
         product.reload
         expect(product.quantity_product).to be(10)
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(products_path)
       end
+
+      it 'when params are invalid display error message and redirect to Product#index page' do
+        patch product_path(product.id), params: { product: { quantity_product: -1 } }
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(products_path)
+      end
     end
 
-    context 'when Product params are invalid' do
-      it 'display error message and redirect to Product#index page' do
-        patch product_path(product.id), params: { product: { quantity_product: -1 } }
+    context 'when update commit message is Edit product' do
+      it 'when params are valid update Product info successfully and redirect to Product#index page' do
+        patch product_path(product.id), params: { commit: 'Edit product', product: { name_product: 'Alfajor' } }
+        expect(product.reload.name_product).to eq('Alfajor')
+        expect(response).to have_http_status(:found)
+        expect(response).to redirect_to(products_path)
+      end
+
+      it 'when params are invalid display error message and redirect to Product#index page' do
+        patch product_path(product.id), params: { commit: 'Edit product', product: { name_product: '' } }
+        expect { product.reload }.not_to change(product, :name_product)
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(products_path)
       end
