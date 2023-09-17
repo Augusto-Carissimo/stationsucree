@@ -88,7 +88,7 @@ RSpec.describe RecipesController do
       expect(response).to redirect_to(recipe_path(recipe))
     end
 
-    it 'when params are invalid update Recipe ingredient_recipe successfully and redirect to Recipe#show page' do
+    it 'when params are invalid update Recipe ingredient_recipe successfully and redirect to Recipe#show page' do # rubocop:disable RSpec/ExampleLength
       patch recipe_path(recipe),
             params: { recipe: { recipe.ingredient_recipes.first.ingredient.name_ingredient => -1 } }
       expect(recipe.ingredient_recipes.first.quantity_recipe).to eq(1)

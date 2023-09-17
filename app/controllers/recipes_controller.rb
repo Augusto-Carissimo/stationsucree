@@ -32,7 +32,7 @@ class RecipesController < ApplicationController
     end
   end
 
-  def update # rubocop:disable Metrics/AbcSize: Assignment Branch Condition size for produce_product is too high
+  def update # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     params[:recipe].each do |param|
       if param[1].to_f.negative?
         flash[:notice] = I18n.t 'rcnm'
