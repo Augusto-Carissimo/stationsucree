@@ -1,6 +1,7 @@
 databases:
-  - name: postgres
-    ipAllow: []
+  - name: stationsucree
+    databaseName: stationsucree
+    user: admin
 
 services:
   - type: web
