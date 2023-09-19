@@ -17,4 +17,3 @@ production:
   url: <%= ENV["DATABASE_URL"] %>
   database: stationsucree_production
   username: postgress
-  password: <%= ENV["STATIONSUCREE_DATABASE_PASSWORD"] %>
