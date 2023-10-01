@@ -4,6 +4,10 @@ require 'rails_helper'
 
 RSpec.describe User do
   describe 'validation' do
-    it { is_expected.to validate_uniqueness_of(:username) }
+    before do
+      create(:user)
+    end
+
+    it { is_expected.to validate_uniqueness_of(:email) }
   end
 end

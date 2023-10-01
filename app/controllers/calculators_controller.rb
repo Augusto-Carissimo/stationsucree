@@ -2,6 +2,7 @@
 
 class CalculatorsController < ApplicationController
   before_action :set_products
+  before_action :require_user
 
   def index; end
 

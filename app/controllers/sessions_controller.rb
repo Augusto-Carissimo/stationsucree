@@ -2,7 +2,7 @@
 
 class SessionsController < ApplicationController
   def create # rubocop:disable Metrics/AbcSize
-    user = User.find_by(username: params[:session][:username])
+    user = User.find_by(email: params[:session][:email])
     if user&.authenticate(params[:session][:password])
       session[:user_id] = user.id
       flash[:success] = I18n.t 'sli'

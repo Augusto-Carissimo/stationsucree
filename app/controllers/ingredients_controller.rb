@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class IngredientsController < ApplicationController
+  before_action :require_user
 
   def index
     @ingredients = Ingredient.all

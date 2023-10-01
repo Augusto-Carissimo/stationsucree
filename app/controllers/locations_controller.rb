@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class LocationsController < ApplicationController
+  before_action :require_user
 
   def index
     @locations = Location.distinct(:id).includes(stock_per_locations: :product)

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class ProductsController < ApplicationController # rubocop:disable Metrics/ClassLength: Class has too many lines
+  before_action :require_user
   before_action :set_product, only: %i[show edit update destroy]
 
   def index

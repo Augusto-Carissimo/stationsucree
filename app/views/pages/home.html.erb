@@ -1,3 +1,41 @@
+<% if !logged_in? %>
   <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h1> Login </h1>
+        <%= form_with(scope: :session, url: login_path) do |form| %>
+          <p>
+            <%= form.label :email %><br/>
+            <%= form.text_field :email %><br/>
+          </p>
+          <p>
+            <%= form.label :password %><br/>
+            <%= form.password_field :password %><br/>
+          </p>
+          <p>
+            <%= form.submit 'Log in' %>
+          </p>
+        <% end %>
+      </div>
 
+      <div class="col-md-8">
+        <h1> Sign up </h1>
+        <%= form_with(scope: :session, url: login_path) do |form| %>
+          <p>
+            <%= form.label :email %><br/>
+            <%= form.text_field :email %><br/>
+          </p>
+          <p>
+            <%= form.label :password %><br/>
+            <%= form.password_field :password %><br/>
+          </p>
+          <p>
+            <%= form.submit 'Log in' %>
+          </p>
+        <% end %>
+      </div>
+    </div>
   </div>
+<% end %>
+
+
