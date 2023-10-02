@@ -45,3 +45,5 @@ en:
   pli: 'Please log in'
   su: 'Stock updated'
   rcnm: "Recipes can't have negative quantities."
+  ena: "Email not authorized or already sign up."
+  sus: 'Sign up successfully.'
