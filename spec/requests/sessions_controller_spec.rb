@@ -9,10 +9,19 @@ RSpec.describe SessionsController do
     context 'when user sign up is successfull' do
       it 'create user and logs in' do
         post login_path, params: { commit: 'Sign up', session: { email: 'test@email.com', password: 'test' } }
-        expect(session[:user_id]).not_to be(nil)
+        expect(session[:user_id]).not_to be_nil
         expect(response).to redirect_to(root_path)
-        expect(User.count).to eq(2)
+        expect(User.count).to eq(3)
         expect(response.request.flash[:success]).to include('Sign up')
+      end
+    end
+
+    context 'when user sign up fails' do
+      it 'display error message' do
+        post login_path, params: {
+          commit: 'Sign up', session: { email: 'notexisting@email.com', password: 'test' }
+        }
+        expect(response.request.flash[:error]).to include('not authorized')
       end
     end
 
