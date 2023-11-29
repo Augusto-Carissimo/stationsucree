@@ -5,7 +5,7 @@ class ProductsController < ApplicationController # rubocop:disable Metrics/Class
   before_action :set_product, only: %i[show edit update destroy]
 
   def index
-    @products = Product.all
+    @products = Product.all.order(name_product: :asc)
   end
 
   def show; end

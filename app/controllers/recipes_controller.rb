@@ -12,8 +12,8 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-    @ingredients = Ingredient.all
-    @subproducts = Product.where(is_subproduct: true)
+    @ingredients = Ingredient.all.order(name_ingredient: :asc)
+    @subproducts = Product.where(is_subproduct: true).order(name_product: :asc)
   end
 
   def edit; end

@@ -8,7 +8,7 @@ class Recipe < ApplicationRecord
   validates :product_id, uniqueness: true
 
   def total_price
-    @total_price ||= (price_ingredients + price_subproducts).round(2)
+    @total_price ||= (price_ingredients + price_subproducts).round(3)
   end
 
   def price_ingredients
@@ -21,7 +21,7 @@ class Recipe < ApplicationRecord
     total = 0
     subproduct_recipes.select { |sr| sr.product.recipe }
                       .map { |sr| total += (sr.product.recipe.price_ingredients * sr.quantity_recipe) }
-    @price_subproducts ||= total.round(2)
+    @price_subproducts ||= total.round(3)
   end
 
   def total_amount
