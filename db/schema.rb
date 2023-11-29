@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_01_032849) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_29_134814) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -19,17 +19,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_032849) do
     t.bigint "ingredient_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "quantity_recipe", default: 0.0
+    t.decimal "quantity_recipe", default: "0.0"
     t.index ["ingredient_id"], name: "index_ingredient_recipes_on_ingredient_id"
     t.index ["recipe_id"], name: "index_ingredient_recipes_on_recipe_id"
   end
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name_ingredient"
-    t.float "last_price", default: 0.0
+    t.decimal "last_price", default: "0.0"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.float "quantity_ingredient", default: 0.0
+    t.decimal "quantity_ingredient", default: "0.0"
     t.index ["name_ingredient"], name: "index_ingredients_on_name_ingredient", unique: true
   end
 
@@ -41,6 +41,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_01_032849) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name_location"], name: "index_locations_on_name_location", unique: true
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string "title"
+    t.string "company"
+    t.string "link"
+    t.string "website"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "products", force: :cascade do |t|
