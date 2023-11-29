@@ -33,14 +33,16 @@ class RecipesController < ApplicationController
   end
 
   def update # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-    params[:recipe].each do |param|
-      if param[1].to_f.negative?
-        flash[:notice] = I18n.t 'rcnm'
-      elsif (ingredient = Ingredient.find_by(name_ingredient: param[0]))
-        @recipe.ingredient_recipes.find_by(ingredient:).update(quantity_recipe: param[1])
-      else
-        product = Product.find_by(name_product: param[0])
-        @recipe.subproduct_recipes.find_by(product:).update(quantity_recipe: param[1])
+    unless params[:recipe].nil?
+      params[:recipe].each do |param|
+        if param[1].to_f.negative?
+          flash[:notice] = I18n.t 'rcnm'
+        elsif (ingredient = Ingredient.find_by(name_ingredient: param[0]))
+          @recipe.ingredient_recipes.find_by(ingredient:).update(quantity_recipe: param[1])
+        else
+          product = Product.find_by(name_product: param[0])
+          @recipe.subproduct_recipes.find_by(product:).update(quantity_recipe: param[1])
+        end
       end
     end
     redirect_to recipe_path(@recipe)
