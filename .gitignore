@@ -43,3 +43,4 @@ coverage
 /spec/examples.txt
 
 .env
+/erd.pdf
