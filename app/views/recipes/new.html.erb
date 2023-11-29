@@ -22,7 +22,7 @@
       <% @ingredients.each do |ingredient| %>
         <tr>
           <th> <%= ingredient.name_ingredient %> </th>
-          <th> <%= form.number_field ingredient.name_ingredient, :step => "0.1", :value => 0 %> </th>
+          <th> <%= form.number_field ingredient.name_ingredient, :step => "0.001", :value => 0 %> </th>
         </tr>
       <% end %>
 
