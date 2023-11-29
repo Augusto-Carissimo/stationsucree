@@ -33,7 +33,7 @@
       <% @subproducts.each do |subproduct| %>
         <tr>
           <th> <%= subproduct.name_product %> </th>
-          <th> <%= form.number_field subproduct.name_product, :step => "0.1", :value => 0 %> </th>
+          <th> <%= form.number_field subproduct.name_product, :step => "0.001", :value => 0 %> </th>
         </tr>
       <% end %>
 

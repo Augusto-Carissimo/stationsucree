@@ -16,7 +16,10 @@ class RecipesController < ApplicationController
     @subproducts = Product.where(is_subproduct: true).order(name_product: :asc)
   end
 
-  def edit; end
+  def edit
+    @ingredients = Ingredient.all.order(name_ingredient: :asc)
+    @subproducts = Product.where(is_subproduct: true).order(name_product: :asc)
+  end
 
   def create # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
     @recipe = Recipe.new(params.require(:recipe).permit(:product_id))

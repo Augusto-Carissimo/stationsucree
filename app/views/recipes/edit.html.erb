@@ -15,23 +15,29 @@
       <th>Ingredient</th>
       <th>Quantity</th>
     </tr>
-    <% unless @recipe.ingredient_recipes.nil? %>
+    <% unless @ingredients.nil? %>
 
-      <% @recipe.ingredient_recipes.each do |ingredient_recipe| %>
-        <tr>
-          <th> <%= ingredient_recipe.ingredient.name_ingredient %> </th>
-          <th> <%= form.number_field ingredient_recipe.ingredient.name_ingredient, :step => "0.001", :min => 0, :value => ingredient_recipe.quantity_recipe %> </th>
+      <% @ingredients.each do |ingredient| %>
+        <% value = @recipe.ingredient_recipes.where(ingredient_id: ingredient.id).first.nil? ? 0 : @recipe.ingredient_recipes.where(ingredient_id: ingredient.id).first.quantity_recipe %>
+          <tr>
+          <th> <%= ingredient.name_ingredient %> </th>
+          <th> <%= form.number_field ingredient.name_ingredient,
+                  :step => "0.001",
+                  :value => value %> </th>
         </tr>
       <% end %>
 
     <% end %>
 
-    <% unless @recipe.subproduct_recipes.nil? %>
+    <% unless @subproducts.nil? %>
 
-      <% @recipe.subproduct_recipes.each do |subproduct| %>
+      <% @subproducts.each do |subproduct| %>
+        <% value = @recipe.subproduct_recipes.where(product_id: subproduct.id).first.nil? ? 0 : @recipe.subproduct_recipes.where(product_id: subproduct.id).first.quantity_recipe %>
         <tr>
-          <th> <%= subproduct.product.name_product %> </th>
-          <th> <%= form.number_field subproduct.product.name_product, :step => "0.1", :value => subproduct.quantity_recipe %> </th>
+          <th> <%= subproduct.name_product %> </th>
+          <th> <%= form.number_field subproduct.name_product,
+                  :step => "0.001",
+                  :value => value %> </th>
         </tr>
       <% end %>
 
