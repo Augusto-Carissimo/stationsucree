@@ -50,7 +50,7 @@ class ProductsController < ApplicationController # rubocop:disable Metrics/Class
   end
 
   def quantity_params
-    params.require(:product).permit(:quantity_product)[:quantity_product].to_f
+    params.require(:product).permit(:quantity_product)[:quantity_product].to_d
   end
 
   def create_stock_per_location(product)
@@ -110,7 +110,7 @@ class ProductsController < ApplicationController # rubocop:disable Metrics/Class
     @product.recipe.ingredient_recipes.each do |ingredient_recipe|
       ingredient = Ingredient.find(ingredient_recipe.ingredient.id)
       consume_quantity = (ingredient_recipe.quantity_recipe * quantity_params)
-      ingredient.update(quantity_ingredient: (ingredient.quantity_ingredient - consume_quantity).round(2))
+      ingredient.update(quantity_ingredient: (ingredient.quantity_ingredient - consume_quantity).round(3))
     end
   end
 
@@ -118,7 +118,7 @@ class ProductsController < ApplicationController # rubocop:disable Metrics/Class
     @product.recipe.subproduct_recipes.each do |subproduct_recipe|
       product = Product.find(subproduct_recipe.product.id)
       consume_quantity = (subproduct_recipe.quantity_recipe * quantity_params)
-      product.update(quantity_product: (product.quantity_product - consume_quantity).round(2))
+      product.update(quantity_product: (product.quantity_product - consume_quantity).round(3))
     end
   end
 end

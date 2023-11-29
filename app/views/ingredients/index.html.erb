@@ -11,7 +11,7 @@
         <td>
           <%= link_to ingredient.name_ingredient, ingredient_path(ingredient), class: "nav-link" %>
         </td>
-        <td> <%= ingredient.quantity_ingredient %> kg </td>
+        <td> <%= '%.3f' % ingredient.quantity_ingredient %> kg </td>
         <td>
           <%= form_with(model: ingredient,  local:true) do |form| %>
             <p>

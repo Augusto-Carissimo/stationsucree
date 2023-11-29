@@ -48,7 +48,7 @@ class IngredientsController < ApplicationController
   private
 
   def add_ingredient_quantity
-    update_quantity = (@ingredient.quantity_ingredient + params[:ingredient][:quantity_ingredient].to_f).round(2)
+    update_quantity = (@ingredient.quantity_ingredient + params[:ingredient][:quantity_ingredient].to_d)
     flash.now[:notice] = if @ingredient.update(quantity_ingredient: update_quantity)
                            I18n.t 'ia'
                          else
