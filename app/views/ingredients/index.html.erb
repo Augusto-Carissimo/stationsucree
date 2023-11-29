@@ -15,7 +15,7 @@
         <td>
           <%= form_with(model: ingredient,  local:true) do |form| %>
             <p>
-              <%= form.number_field :quantity_ingredient, :step => "0.1", :value => 0 %> <%= form.submit 'Add'%>
+              <%= form.number_field :quantity_ingredient, :step => "0.001", :value => 0 %> <%= form.submit 'Add'%>
             </p>
           <% end %>
         </td>

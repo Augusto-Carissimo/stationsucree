@@ -4,7 +4,7 @@ class IngredientsController < ApplicationController
   before_action :require_user
 
   def index
-    @ingredients = Ingredient.all
+    @ingredients = Ingredient.all.order(name_ingredient: :asc)
   end
 
   def show
