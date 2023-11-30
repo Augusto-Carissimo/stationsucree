@@ -21,6 +21,16 @@
   </p>
 
   <p>
+    <%= form.label :unit %><br/>
+    <%= form.text_field :unit %><br/>
+  </p>
+
+  <p>
+    <%= form.label :quantity_per_unit %><br/>
+    <%= form.number_field :quantity_per_unit, :step => "0.001" %><br/>
+  </p>
+
+  <p>
     <%= form.submit 'Edit ingredient' %>
   </p>
 <% end %>

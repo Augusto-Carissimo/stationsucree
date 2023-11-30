@@ -3,15 +3,23 @@
   <table style="width:80%">
     <tr>
       <th>Ingredient</th>
-      <th>Quantity</th>
+      <th>Quantity per unit</th>
+      <th>Price</th>
+      <th>Price per unit</th>
       <th>Update quantity</th>
+      <th>Stock</th>
     </tr>
     <% @ingredients.each do |ingredient| %>
       <tr>
         <td>
           <%= link_to ingredient.name_ingredient, ingredient_path(ingredient), class: "nav-link" %>
         </td>
-        <td> <%= ingredient.quantity_ingredient %> kg </td>
+        <td> <%= ingredient.quantity_per_unit %> </td>
+        <td> <%= ingredient.last_price %> </td>
+
+        <% value = ingredient.last_price.nil? || ingredient.quantity_per_unit.nil? ? 0 : ingredient.last_price / ingredient.quantity_per_unit %>
+        <td> <%= value %> </td>
+
         <td>
           <%= form_with(model: ingredient,  local:true) do |form| %>
             <p>
@@ -19,6 +27,8 @@
             </p>
           <% end %>
         </td>
+
+        <td> <%= ingredient.quantity_ingredient %> <%= ingredient.unit %> </td>
       </tr>
     <% end %>
   </table>
