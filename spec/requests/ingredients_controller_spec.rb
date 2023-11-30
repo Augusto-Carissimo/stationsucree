@@ -53,6 +53,13 @@ RSpec.describe IngredientsController do
         expect(response).to have_http_status(:found)
         expect(response).to redirect_to(ingredients_path)
       end
+
+      it 'create new PriceHistory, PriceHistory#price == Ingredient#last_price' do
+        expect { post ingredients_path, params: { ingredient: { name_ingredient: 'Butter', last_price: 100 } } }
+          .to change { PriceHistory.all.count }.by(1)
+
+        expect(PriceHistory.last.reload.price).to eq(Ingredient.last.reload.last_price)
+      end
     end
 
     context 'when Ingrendient params are invalid' do
@@ -95,6 +102,13 @@ RSpec.describe IngredientsController do
         patch ingredient_path(ingredient), params: { commit: 'Edit', ingredient: { name_ingredient: '' } }
         expect(ingredient.reload.name_ingredient).to eq(ingredient.name_ingredient)
         expect(response).to redirect_to(ingredients_path)
+      end
+
+      it 'when price is update new PriceHistory, PriceHistory#price == Ingredient#last_price' do
+        expect { patch ingredient_path(ingredient), params: { ingredient: { last_price: 200 } } }
+          .to change { PriceHistory.all.count }.by(1)
+
+        expect(PriceHistory.last.reload.price).to eq(ingredient.reload.last_price)
       end
     end
   end

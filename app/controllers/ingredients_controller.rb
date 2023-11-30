@@ -2,26 +2,24 @@
 
 class IngredientsController < ApplicationController
   before_action :require_user
+  before_action :set_ingredient, only: %i[show edit update destroy]
 
   def index
     @ingredients = Ingredient.all.order(name_ingredient: :asc)
   end
 
-  def show
-    @ingredient = Ingredient.find(params[:id])
-  end
+  def show; end
 
   def new
     @ingredient = Ingredient.new
   end
 
-  def edit
-    @ingredient = Ingredient.find(params[:id])
-  end
+  def edit; end
 
   def create
     @ingredient = Ingredient.new(params.require(:ingredient).permit(:name_ingredient, :last_price))
     if @ingredient.save
+      PriceHistory.create!(ingredient_id: @ingredient.id, price: params[:ingredient][:last_price].to_d )
       redirect_to ingredients_path
     else
       flash[:notice] = I18n.t 'error'
@@ -30,22 +28,25 @@ class IngredientsController < ApplicationController
   end
 
   def update
-    @ingredient = Ingredient.find(params[:id])
     if params[:commit] == 'Add'
       add_ingredient_quantity
     else
       edit_ingredient_info
+      PriceHistory.create!(ingredient_id: @ingredient.id, price: params[:ingredient][:last_price].to_d )
     end
     redirect_to ingredients_path
   end
 
   def destroy
-    @ingredient = Ingredient.find(params[:id])
     @ingredient.destroy
     redirect_to ingredients_path
   end
 
   private
+
+  def set_ingredient
+    @ingredient = Ingredient.find(params[:id])
+  end
 
   def add_ingredient_quantity
     update_quantity = (@ingredient.quantity_ingredient + params[:ingredient][:quantity_ingredient].to_d)
