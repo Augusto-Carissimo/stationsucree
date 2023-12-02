@@ -25,7 +25,6 @@ group :development, :test do
   gem 'faker'
   gem 'pry'
   gem 'rails-controller-testing'
-  gem 'rails-erd'
   gem 'rspec'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
