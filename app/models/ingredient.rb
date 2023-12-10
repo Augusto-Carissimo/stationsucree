@@ -6,5 +6,5 @@ class Ingredient < ApplicationRecord
   validates :quantity_ingredient, numericality: { greater_than_or_equal_to: 0 }
 
   has_many :ingredient_recipes, dependent: :destroy
-  has_many :price_histories
+  has_many :price_histories, dependent: :destroy
 end
