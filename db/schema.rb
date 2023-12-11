@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_11_025616) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_11_121854) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -32,6 +32,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_11_025616) do
     t.decimal "quantity_ingredient", precision: 8, scale: 3, default: "0.0"
     t.string "unit"
     t.decimal "quantity_per_unit", precision: 8, scale: 3
+    t.string "current_brand"
+    t.string "current_supplier"
     t.index ["name_ingredient"], name: "index_ingredients_on_name_ingredient", unique: true
   end
 
@@ -52,6 +54,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_11_025616) do
     t.datetime "updated_at", null: false
     t.string "brand"
     t.string "supplier"
+    t.string "unit"
+    t.decimal "quantity_per_unit", precision: 8, scale: 3
     t.index ["ingredient_id"], name: "index_price_histories_on_ingredient_id"
   end
 
