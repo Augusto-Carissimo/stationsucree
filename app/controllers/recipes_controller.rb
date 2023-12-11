@@ -8,7 +8,10 @@ class RecipesController < ApplicationController
     @recipes = Recipe.all
   end
 
-  def show; end
+  def show
+    @ingredient_recipes = @recipe.ingredient_recipes#.order(name_ingredient: :asc)
+    @subproduct_recipes = @recipe.subproduct_recipes#.order(product_name: :asc)
+  end
 
   def new
     @recipe = Recipe.new
@@ -36,15 +39,32 @@ class RecipesController < ApplicationController
   end
 
   def update # rubocop:disable Metrics/AbcSize, Metrics/MethodLength
-    unless params[:recipe].nil?
-      params[:recipe].each do |param|
-        if param[1].to_f.negative?
-          flash[:notice] = I18n.t 'rcnm'
-        elsif (ingredient = Ingredient.find_by(name_ingredient: param[0]))
-          @recipe.ingredient_recipes.find_by(ingredient:).update(quantity_recipe: param[1])
+    params[:recipe].each do |ingredient_name, quantity|
+      if quantity.to_d.negative?
+        flash[:notice] = I18n.t 'rcnm'
+      elsif ingredient = Ingredient.find_by(name_ingredient: ingredient_name)
+        if ingredient_recipe = @recipe.ingredient_recipes.find_by(ingredient:)
+          if quantity.to_d == 0.0
+            ingredient_recipe.destroy
+          elsif quantity.to_d > 0.0
+            ingredient_recipe.update(quantity_recipe: quantity)
+          end
         else
-          product = Product.find_by(name_product: param[0])
-          @recipe.subproduct_recipes.find_by(product:).update(quantity_recipe: param[1])
+          if quantity.to_d > 0.0
+            @recipe.ingredient_recipes.create(ingredient:, quantity_recipe: quantity)
+          end
+        end
+      else
+        if product = Product.find_by(name_product: ingredient_name)
+          if subproduct_recipe = @recipe.subproduct_recipes.find_by(product:)
+            if quantity.to_d == 0.0
+              subproduct_recipe.destroy
+            elsif quantity.to_d > 0.0
+              subproduct_recipe.update(quantity_recipe: quantity)
+            end
+          elsif quantity.to_d > 0.0
+            @recipe.subproduct_recipes.create(product:, quantity_recipe: quantity)
+          end
         end
       end
     end
