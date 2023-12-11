@@ -7,12 +7,20 @@
 <table style="width:50%">
   <tr>
     <th>Price</th>
+    <th>Brand</th>
+    <th>Supplier</th>
     <th>Date</th>
   </tr>
   <% @ingredient.price_histories.order(created_at: :desc).each do |history| %>
     <tr>
       <td>
         <%= history.price %>
+      </td>
+      <td>
+        <%= history.brand %>
+      </td>
+      <td>
+        <%= history.supplier %>
       </td>
       <td> <%= history.created_at.strftime("%Y-%m-%d") %> </td>
     </tr>
