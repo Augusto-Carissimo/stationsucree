@@ -1,12 +1,14 @@
 <h3 class="display-3"> <%= @ingredient.name_ingredient  %> </h3>
 
-<p> Current price: <%= @ingredient.last_price %>€ per kg</li> </p>
+<p> Current price: <%= @ingredient.last_price %>€ <%= @ingredient.unit %> </li> </p>
 <br>
 
 <h5> Price history </h5>
 <table style="width:50%">
   <tr>
     <th>Price</th>
+    <th>Quantity per unit</th>
+    <th>Price per unit</th>
     <th>Brand</th>
     <th>Supplier</th>
     <th>Date</th>
@@ -15,6 +17,13 @@
     <tr>
       <td>
         <%= history.price %>
+      </td>
+      <td>
+        <%= history.quantity_per_unit %>
+      </td>
+      <td>
+        <% value = history.price.nil? || history.quantity_per_unit.nil? ? 0 : history.price / history.quantity_per_unit %>
+        <%= value %>
       </td>
       <td>
         <%= history.brand %>

@@ -17,7 +17,7 @@ class IngredientsController < ApplicationController
   def edit; end
 
   def create
-    @ingredient = Ingredient.new(params.require(:ingredient).permit(:name_ingredient, :last_price, :unit, :quantity_per_unit))
+    @ingredient = Ingredient.new(params.require(:ingredient).permit(:name_ingredient, :last_price, :unit, :quantity_per_unit, :current_brand, :current_supplier))
     if @ingredient.save
       PriceHistory.create!(ingredient_id: @ingredient.id, price: params[:ingredient][:last_price].to_d )
       redirect_to ingredients_path
@@ -32,7 +32,12 @@ class IngredientsController < ApplicationController
       add_ingredient_quantity
     else
       edit_ingredient_info
-      PriceHistory.create!(ingredient_id: @ingredient.id, price: params[:ingredient][:last_price].to_d )
+      PriceHistory.create!(
+        ingredient_id: @ingredient.id,
+        price: params[:ingredient][:last_price].to_d,
+        quantity_per_unit: params[:ingredient][:quantity_per_unit].to_d,
+        brand: params[:ingredient][:current_brand],
+        supplier: params[:ingredient][:current_supplier])
     end
     redirect_to ingredients_path
   end
