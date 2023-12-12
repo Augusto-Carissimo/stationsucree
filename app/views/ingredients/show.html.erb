@@ -1,6 +1,11 @@
 <h3 class="display-3"> <%= @ingredient.name_ingredient  %> </h3>
 
-<p> Current price: <%= @ingredient.last_price %>€ <%= @ingredient.unit %> </li> </p>
+<p> Current price: <%= @ingredient.last_price %>€ <%= @ingredient.unit %> </p>
+<p> Quantity per unit: <%= @ingredient.quantity_per_unit %>€ <%= @ingredient.unit %> </p>
+<p> Price per unit: <% value = @ingredient.last_price.nil? || @ingredient.quantity_per_unit.nil? ? 0 : @ingredient.last_price / @ingredient.quantity_per_unit %>
+<%= value %> </p>
+<p> Current brand: <%= @ingredient.current_brand %> </p>
+<p> Current supplier: <%= @ingredient.current_supplier %> </p>
 <br>
 
 <h5> Price history </h5>

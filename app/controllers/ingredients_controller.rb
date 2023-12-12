@@ -17,7 +17,8 @@ class IngredientsController < ApplicationController
   def edit; end
 
   def create
-    @ingredient = Ingredient.new(params.require(:ingredient).permit(:name_ingredient, :last_price, :unit, :quantity_per_unit, :current_brand, :current_supplier))
+    @ingredient = Ingredient.new(params.require(:ingredient)
+      .permit(:name_ingredient, :last_price, :unit, :quantity_per_unit, :current_brand, :current_supplier))
     if @ingredient.save
       PriceHistory.create!(ingredient_id: @ingredient.id, price: params[:ingredient][:last_price].to_d )
       redirect_to ingredients_path
@@ -30,7 +31,15 @@ class IngredientsController < ApplicationController
   def update
     if params[:commit] == 'Add'
       add_ingredient_quantity
-    else
+    elsif params[:commit] == 'Update price' && params[:ingredient][:last_price].to_d != @ingredient.last_price
+      update_price
+      PriceHistory.create!(
+        ingredient_id: @ingredient.id,
+        price: params[:ingredient][:last_price].to_d,
+        quantity_per_unit: @ingredient.quantity_per_unit,
+        brand: @ingredient.current_brand,
+        supplier: @ingredient.current_supplier)
+    elsif params[:commit] == 'Edit ingredient'
       edit_ingredient_info
       PriceHistory.create!(
         ingredient_id: @ingredient.id,
@@ -63,10 +72,21 @@ class IngredientsController < ApplicationController
   end
 
   def edit_ingredient_info
-    flash.now[:notice] = if @ingredient.update(params.require(:ingredient).permit(:name_ingredient, :last_price, :unit, :quantity_per_unit))
+    flash.now[:notice] = if @ingredient.update(params.require(:ingredient)
+      .permit(:name_ingredient, :last_price, :unit, :quantity_per_unit, :current_brand, :current_supplier))
                            I18n.t 'iu'
                          else
                            I18n.t 'error'
                          end
   end
+
+  def update_price
+    flash.now[:notice] = if @ingredient.update(params.require(:ingredient)
+      .permit(:last_price))
+      I18n.t 'iu'
+    else
+      I18n.t 'error'
+    end
+  end
+
 end
